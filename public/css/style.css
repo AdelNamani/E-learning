@@ -494,9 +494,10 @@ header.header.sticky {
   -webkit-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background: #480048;
-  background: -webkit-linear-gradient(left, #480048, #C04848);
-  background: linear-gradient(to right, #480048, #C04848);
+  background: #2193b0;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   padding: 15px 20px;
 }
 @media (max-width: 991px) {
@@ -1136,8 +1137,8 @@ video {
   background-size: cover;
 }
 .hero_single .wrapper {
-  background-color: #632c8d;
-  background-color: rgba(102, 45, 145, 0.8);
+  /* background-color: #632c8d;
+  background-color: rgba(102, 45, 145, 0.8); */
 }
 .hero_single.start_bg_zoom:before {
   animation: pop-in 5s 0.3s cubic-bezier(0, 0.5, 0, 1) forwards;
@@ -1213,8 +1214,8 @@ video {
   background-size: cover;
 }
 .hero_single.version_2 .wrapper {
-  background-color: #372675;
-  background-color: rgba(57, 39, 121, 0.8);
+  /* background-color: #372675;
+  background-color: rgba(57, 39, 121, 0.8); */
 }
 .hero_single.version_2 .wrapper h3 {
   font-size: 42px;
@@ -2969,7 +2970,7 @@ section#reviews {
 
 /*-------- 2.5 Login/register/admission--------*/
 #login_bg, #register_bg, #admission_bg {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_login.jpg) center center no-repeat fixed;
+  background: url("/img/login.jpg") center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -2979,7 +2980,6 @@ section#reviews {
 }
 
 #register_bg {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_register.jpg) center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -2987,7 +2987,6 @@ section#reviews {
 }
 
 #admission_bg {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_admission.jpg) center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -2997,9 +2996,9 @@ section#reviews {
 #login figure, #register figure {
   text-align: center;
   margin-bottom: 30px;
-  background: #480048;
-  background: -webkit-linear-gradient(left, #480048, #C04848);
-  background: linear-gradient(to right, #480048, #C04848);
+  background: #2193b0;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: -45px -60px 30px -60px;
   padding: 20px 60px 25px 60px;
 }
@@ -3218,7 +3217,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 .error_message {
-  font-weight: 500;
+  font-size : 12px ; 
+  font-weight: 300;
   color: #e3464c;
 }
 

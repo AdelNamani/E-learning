@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Udema a modern educational site template">
     <meta name="author" content="Ansonika">
-    <title>UDEMA | Modern Educational site template - SHARED ON THEMELOCK.COM</title>
+    <title> CUFA | E-Learning Platform</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -27,16 +27,12 @@
 
 </head>
 
-<body>
+<body id="{{$id}}">
 		
 	<div id="page">
 		
-    @include('layouts.header')
-
     @yield('content')
 	
-	@include('layouts.footer')
-
 	</div>
 	<!-- page -->
 	

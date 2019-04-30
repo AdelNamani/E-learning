@@ -1,7 +1,7 @@
 	<header class="header menu_2">
 		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Preload -->
 		<div id="logo">
-			<a href="index.html"><img src="img/logo.png" width="149" height="42" data-retina="true" alt=""></a>
+			<a href="index.html"><img src="img/cufa.png" width="100" data-retina="true" alt=""></a>
 		</div>
 		<ul id="top_menu">
 			<li><a href="login.html" class="login">Login</a></li>
