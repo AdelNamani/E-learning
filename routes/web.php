@@ -13,7 +13,13 @@
 
 Route::get('/', 'CourseController@index')->name('home');
 
-//Route::get('/profile','');
+Route::get('/profile','UserController@show')->name('profile')->middleware('auth');
+
+Route::get('/profile/edit','UserController@edit')->name('profile_edit')->middleware('auth');
+
+Route::post('/profile/update_info','UserController@update_info')->name('profile_update_info')->middleware('auth');
+
+Route::post('/profile/update_password','UserController@update_password')->name('profile_update_password')->middleware('auth');
 
 Auth::routes();
 
