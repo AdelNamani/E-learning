@@ -40,7 +40,7 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* 1.  SITE STRUCTURE and TYPOGRAPHY */
 /*============================================================================================*/
 /*Google web font family*/
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,800");
+/* @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,800"); */
 /* Main navigation */
 @import url("../css/menu_2.css");
 #menu.fake_menu {
@@ -1305,7 +1305,7 @@ video {
   -moz-border-radius: 0 3px 3px 0;
   -ms-border-radius: 0 3px 3px 0;
   border-radius: 0 3px 3px 0;
-  background-color: #92278f;
+  background-color: #3f9fff;
 }
 #custom-search-input input[type='submit']:hover {
   background-color: #FFC107;
@@ -1953,7 +1953,7 @@ a.box_feat h3 {
 /*-------- 2.2 Courses list --------*/
 .filters_listing {
   padding: 10px 0 5px 0;
-  background: #FFC107;
+  background: #3f9fff;
   z-index: 999999 !important;
   position: relative;
 }
@@ -2772,11 +2772,11 @@ a.boxed_list:hover i {
 .list_lessons ul li a {
   color: #555;
 }
-.list_lessons ul li a.video:before {
+/* .list_lessons ul li a.video:before {
   font-family: 'ElegantIcons';
   content: "\49";
   margin-right: 10px;
-}
+} */
 .list_lessons ul li a.txt_doc:before {
   font-family: 'ElegantIcons';
   content: "\68";

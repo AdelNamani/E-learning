@@ -11,6 +11,6 @@ $factory->define(Lesson::class, function (Faker $faker) {
         'description' => $faker->paragraph,
         'video' => null,
         'support' => null,
-        'chapter_id' => 1
+        'chapter_id' => 2
     ];
 });
