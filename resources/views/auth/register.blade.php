@@ -1,5 +1,5 @@
 
-@extends('layouts.default' , ['id' => 'login_bg'])
+@extends('layouts.default' , ['id' => 'register_bg'])
 
 @section('content')
 <nav id="menu" class="fake_menu"></nav>
@@ -17,7 +17,7 @@
             <form autocomplete="off" action="{{route('register')}}" method="POST">
                 @csrf
                 <div class="form-group">
-
+                <div class="divider"><span>Register</span></div>
                 <span class="input">
                 <input id="first_name" type="text" class="input_field" name="first_name" value="{{ old('first_name') }}" required autocomplete="name" autofocus>
                                 @error('first_name')

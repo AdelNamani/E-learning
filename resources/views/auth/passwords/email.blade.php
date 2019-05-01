@@ -1,47 +1,44 @@
-@extends('layouts.app')
+@extends('layouts.default' , ['id' => 'login_bg'])
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<nav id="menu" class="fake_menu"></nav>
+	
+<div id="preloader">
+    <div data-loader="circle-side"></div>
+</div>
+<!-- End Preload -->
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+<div id="login">
+    <aside>
+        <figure>
+            <a href="index.html"><img src={{asset('img/cufa.png')}} width="149" data-retina="true" alt=""></a>
+        </figure>
+    <form autocomplete="off" action="{{ route('password.email') }}" method="POST">
+        @csrf
+            <div class="form-group">
+                <div class="divider"><span>Reset Password</span></div>
+                <span class="input">
+                    <input id="email" type="email" class="input_field" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="error_message" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    <label class="input_label">
+                    <span class="input__label-content">Your Email</span>
+                </label>
+                </span>
+                
+                <div id="pass-info" class="clearfix"></div>
             </div>
-        </div>
-    </div>
+                    <button type="submit" class="btn_1 rounded full-width add_top_30">{{ __('Send Password Reset Link') }}</button>
+
+           
+        <div class="copy">
+            © <script>
+        document.write(new Date().getFullYear())
+        </script> {{config('app.name')}}</div>
+    </aside>
 </div>
 @endsection

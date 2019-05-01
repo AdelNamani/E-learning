@@ -21,7 +21,7 @@
         <input type="password" name="old_password">
 
         <label>New password</label>
-        <input type="password" name="password">
+        <input type="password" name="password"> 
 
         <label>Confirm new password</label>
         <input type="password" name="password_confirmation">

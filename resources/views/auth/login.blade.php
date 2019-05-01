@@ -17,7 +17,7 @@
     <form autocomplete="off" action="{{route('login')}}" method="POST">
         @csrf
             <div class="form-group">
-
+                <div class="divider"><span>Login</span></div>
                 <span class="input">
                 <input class="input_field" id="email" type="email"  name="email" required autocomplete="email" autofocus>
                     @error('email')
