@@ -21,6 +21,12 @@ Route::get('/course/{id}' , 'CourseController@show')->name('course.show');
 
 /**----------------------------------------------------------------------------------------------------------------**/
 
+Route::get('/lesson/{id}','LessonController@show')->name('lesson.show');
+
+Route::get('/lesson/{id}/complete','LessonController@complete')->name('lesson.complete');
+
+/**----------------------------------------------------------------------------------------------------------------**/
+
 Route::get('/profile','UserController@show')->name('profile')->middleware('auth');
 
 Route::get('/profile/edit','UserController@edit')->name('profile.edit')->middleware(['auth','verified']);

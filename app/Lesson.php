@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Lesson extends Model
 {
     public function chapter(){
-        return $this->belongsTo('chapter');
+        return $this->belongsTo(Chapter::class);
     }
 
     public function users(){
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
+
 }

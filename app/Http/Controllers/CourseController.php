@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -89,4 +90,5 @@ class CourseController extends Controller
     {
         //
     }
+
 }

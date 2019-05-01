@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Lesson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LessonController extends Controller
 {
@@ -44,9 +45,10 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function show(Lesson $lesson)
+    public function show(Request $request)
     {
-        //
+        $lesson=Lesson::findOrFail($request['id']);
+        return view('lesson_show' , ['lesson' => $lesson]);
     }
 
     /**
@@ -81,5 +83,14 @@ class LessonController extends Controller
     public function destroy(Lesson $lesson)
     {
         //
+    }
+
+    public function complete(Request $request){
+        $user = Auth::user();
+        $lesson = Lesson::findOrFail($request['id']);
+        $lesson->users()->attach($user->id);
+        return redirect(route('lesson.show',['id' => $request['id']]));
+        /** TODO : Redirection to the next lesson */
+
     }
 }
