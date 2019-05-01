@@ -86,7 +86,7 @@
                             <ul>
                                 {{-- <li><i class="icon_clock_alt"></i> 1h 30min</li> --}}
                                 <li><i class="icon-user"></i> {{$course->teacher}}</li>
-                                <li><a href="{{route('course.show',['id'=>$course->id])}}">Enroll now</a></li>
+                                <li><a href="{{route('course.show',['id'=>$course->id])}}"> Enroll Now</a></li>
                             </ul>
                         </div>
                     </div>

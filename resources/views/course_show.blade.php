@@ -66,17 +66,18 @@
                                 <div class="card">
                                         <div class="card-header" role="tab" id="headingOne">
                                             <h5 class="mb-0">
-                                                <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="indicator ti-minus"></i> {{$chapter->name}}</a>
+                                                <a data-toggle="collapse" href="#{{$chapter->id}}" aria-expanded="true" aria-controls="{{$chapter->id}}"><i class="indicator ti-minus"></i> {{$chapter->name}}</a>
                                             </h5>
                                         </div>
     
-                                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion_lessons">
+                                        <div id="{{$chapter->id}}" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion_lessons">
                                             <div class="card-body">
                                                 <div class="list_lessons">
                                                     <ul>
                                                         @foreach($chapter->lessons as $lesson)
                                                             <li> 
-                                                                @if(!$lesson->users->contains(Auth::user()))
+																{{-- @if(!$lesson->users->contains(Auth::user())) --}}
+																@if(0)
                                                                     <i style="color : green !important ;" class="icon-ok"></i> 
                                                                     <a aria-disabled="true" class="video"> {{$lesson->name}} </a></li>
                                                                 @else
@@ -227,7 +228,7 @@
 					</div>
 					<!-- /col -->
 					
-					<aside class="col-lg-4" id="sidebar">
+					{{-- <aside class="col-lg-4" id="sidebar">
 						<div class="box_detail">
 							{{-- <figure>
 								<a href="https://www.youtube.com/watch?v=LDgd_gUcqCw" class="video"><i class="arrow_triangle-right"></i><img src="http://via.placeholder.com/800x533/ccc/fff/course_1.jpg" alt="" class="img-fluid"><span>View course preview</span></a>
@@ -235,7 +236,7 @@
 							{{-- <div class="price">
 								$29<span class="original_price"><em>$49</em>60% discount price</span>
 							</div> --}}
-							<a href="{{route('lesson.show', ['id' => $course->chapters[0]->lessons[0]])}}" class="btn_1 full-width">Enroll Now</a>
+							{{-- <a href="{{route('lesson.show', ['id' => $course->chapters[0]->lessons[0]])}}" class="btn_1 full-width">Enroll Now</a> --}}
 							{{-- <a href="#0" class="btn_1 full-width outline"><i class="icon_heart"></i> Add to wishlist</a> --}}
 							{{-- <div id="list_feat">
 								<h3>What's includes</h3>
