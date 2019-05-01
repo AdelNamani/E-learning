@@ -27,6 +27,14 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id . '',
         ]);
 
+        if ($user->email != $request['email']) {
+
+            $user->email_verified_at = null;
+            $user->email = $request['email'];
+            $user->sendEmailVerificationNotification();
+
+        }
+
         $user->first_name = $request['first_name'];
         $user->last_name = $request['last_name'];
         $user->email = $request['email'];
