@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form method="POST" action="{{route('profile_update_info')}}">
+    <form method="POST" action="{{route('profile.update_info')}}">
         @csrf
         <label>First name</label>
         <input type="text" name="first_name" value="{{$user->first_name}}">
@@ -15,7 +15,7 @@
         <button type="submit">Submit</button>
     </form>
 
-    <form method="POST" action="{{route('profile_update_password')}}">
+    <form method="POST" action="{{route('profile.update_password')}}">
         @csrf
         <label>Old password</label>
         <input type="password" name="old_password">

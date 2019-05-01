@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\User;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -15,6 +16,9 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
+        foreach ($courses as $course){
+            $course->teacher = $course->user->first_name.' '.$course->user->last_name;
+        }
         return view('home' , ['courses'=>$courses]);
     }
 
@@ -45,9 +49,11 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function show(Request $request)
     {
-        //
+        $course=Course::findOrFail($request['id']);
+        $course->teacher = $course->user->first_name.' '.$course->user->last_name;
+        return view('course_show' , ['course' => $course]);
     }
 
     /**
