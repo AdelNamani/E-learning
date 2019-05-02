@@ -17,7 +17,5 @@ class Course extends Model
         return $this->hasMany(Chapter::class);
     }
 
-    public function questions(){
-        return $this->hasMany(Question::class);
-    }
+
 }
