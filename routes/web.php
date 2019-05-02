@@ -27,6 +27,10 @@ Route::get('/lesson/{id}/complete','LessonController@complete')->name('lesson.co
 
 /**----------------------------------------------------------------------------------------------------------------**/
 
+Route::get('/chapter/{id}/quizz','ChapterController@quiz')->name('chapter.quiz');
+
+/**----------------------------------------------------------------------------------------------------------------**/
+
 Route::get('/profile','UserController@show')->name('profile')->middleware('auth');
 
 Route::get('/profile/edit','UserController@edit')->name('profile.edit')->middleware(['auth']);

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ChapterController extends Controller
 {
+
+    public function quiz(Request $request){
+        return view('quizz');
+    }
+
     /**
      * Display a listing of the resource.
      *
