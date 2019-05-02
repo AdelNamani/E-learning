@@ -2,7 +2,7 @@
 		<div class="container margin_120_95">
 			<div class="row">
 				<div class="col-lg-6 col-md-12 p-r-5">
-					<p><img src="img/logo.png" width="149" height="42" data-retina="true" alt=""></p>
+					<p><img src="{{asset('img/cufa.png')}}" width="149" height="42" data-retina="true" alt=""></p>
 					<p> CUFA Description tur ea sea. Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu. Nihil facilisi indoctum an vix, ut delectus expetendis vis.</p>
 					<div class="follow_us">
 						<ul>
