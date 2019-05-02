@@ -17,7 +17,16 @@ class Course extends Model
         return $this->hasMany(Chapter::class);
     }
 
-    public function questions(){
-        return $this->hasMany(Question::class);
+    public function get_lessons(){
+        $all_lessons = collect([]);
+        $chapters = $this->chapters;
+        foreach ($chapters as $chapter){
+            $lessons = $chapter->lessons;
+            $all_lessons = $all_lessons->concat($lessons);
+        }
+
+        return $all_lessons;
     }
+
+
 }

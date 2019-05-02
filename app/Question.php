@@ -9,8 +9,8 @@ class Question extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function course(){
-        return $this->belongsTo(Course::class);
+    public function chapter(){
+        return $this->belongsTo(Chapter::class);
     }
 
     /**
