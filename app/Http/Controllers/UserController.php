@@ -11,7 +11,28 @@ class UserController extends Controller
 {
     public function show(){
         $user = Auth::user();
-        return view('profile',['user'=>$user]);
+        $lessons = $user->lessons;
+        $chapters = [];
+        foreach ($lessons as $lesson){
+            array_push($chapters,$lesson->chapter);
+        }
+        $courses=[];
+        foreach ($chapters as $chapter){
+            array_push($courses,$chapter->course);
+        }
+
+        $courses = array_unique($courses);
+
+        foreach($courses as $course){
+            $count = 0;
+
+            foreach ($course->get_lessons() as $lesson){
+                if ($lessons->contains($lesson)) $count ++;
+            }
+            $course->progress = $count / count($course->get_lessons());
+        }
+
+        return view('profile',['user'=>$user,'courses'=>$courses]);
     }
 
     public function edit(){

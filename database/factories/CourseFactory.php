@@ -10,6 +10,6 @@ $factory->define(Course::class, function (Faker $faker) {
         'name' => $faker->word,
         'description' => $faker->paragraph,
         'photo' => null,
-        'user_id' => 1
+        'user_id' => 5
     ];
 });

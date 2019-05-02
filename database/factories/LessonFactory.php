@@ -8,9 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Lesson::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
-        'description' => $faker->paragraph,
-        'video' => null,
-        'support' => null,
-        'chapter_id' => 2
+        'video' => 'https://www.youtube.com/watch?v=BYSoHnQ3Ux0',
+        'chapter_id' => rand(1,20)
     ];
 });

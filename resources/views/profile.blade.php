@@ -58,7 +58,7 @@
                         <div class="col-lg-12">
                             <div class="row">
                                 <!-- ForEach user courses -->
-                                @foreach ($user->courses as $course)
+                                @foreach ($courses as $course)
                                 <div class="col-md-6">
                                     <div class="box_grid wow">
                                         <div class="wrapper">
@@ -66,7 +66,7 @@
                                             <p>{{$course->description}}</p>
                                         </div>
                                         <ul>
-                                            <li><i class="icon-progress-2"></i> 10%</li>
+                                            <li><i class="icon-progress-2"></i> {{(int)($course->progress * 100)}}%</li>
                                             <li><a href="{{route('course.show',['id'=>$course->id])}}">View course</a>
                                             </li>
                                         </ul>
