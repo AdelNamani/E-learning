@@ -25,11 +25,11 @@
                             <div class="card">
                                 <div class="card-header" role="tab">
                                     <h5 class="mb-0">
-                                        <a data-toggle="collapse" href="#collapseOne_payment" aria-expanded="true"><i class="indicator ti-minus"></i>{{$question->statement}}</a>
+                                        <a data-toggle="collapse" href="#{{$question->id}}" aria-expanded="true"><i class="indicator ti-minus"></i>{{$question->statement}}</a>
                                     </h5>
                                 </div>
 
-                                <div id="collapseOne_payment" class="collapse show" role="tabpanel" data-parent="#payment">
+                                <div id="{{$question->id}}" class="collapse show" role="tabpanel" data-parent="#payment">
                                     <div class="card-body">
                                         <div class="container">
                                                 @foreach($question->propositions as $proposition)
