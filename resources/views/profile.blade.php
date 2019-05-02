@@ -42,6 +42,9 @@
                         <li>First Name <span class="float-right">{{ $user->first_name }}</span> </li>
                         <li>Last Name <span class="float-right">{{ $user->last_name }}</span> </li>
                         <li>ُEmail<span class="float-right">{{ $user->email }}</span> </li>
+                        <li>
+                            <a href="{{route('profile.edit')}}" class="btn_1 rounded"> Edit </a>
+                        </li>
 
                     </ul>
                 </div>

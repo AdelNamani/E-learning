@@ -9,7 +9,7 @@ class ChapterController extends Controller
 {
 
     public function quiz(Request $request){
-        return view('quizz');
+        return view('quiz');
     }
 
     /**
