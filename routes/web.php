@@ -17,7 +17,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'CourseController@index')->name('home');
 
-Route::get('/course/{id}' , 'CourseController@show')->name('course.show');
+Route::get('/course/{id}' , 'CourseController@show')->name('course.show')->middleware('auth');
 
 /**----------------------------------------------------------------------------------------------------------------**/
 
@@ -29,7 +29,7 @@ Route::get('/lesson/{id}/complete','LessonController@complete')->name('lesson.co
 
 Route::get('/profile','UserController@show')->name('profile')->middleware('auth');
 
-Route::get('/profile/edit','UserController@edit')->name('profile.edit')->middleware(['auth','verified']);
+Route::get('/profile/edit','UserController@edit')->name('profile.edit')->middleware(['auth']);
 
 Route::post('/profile/update_info','UserController@update_info')->name('profile.update_info')->middleware('auth');
 

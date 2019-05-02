@@ -79,13 +79,14 @@
 																{{-- @if(!$lesson->users->contains(Auth::user())) --}}
 																@if(0)
                                                                     <i style="color : green !important ;" class="icon-ok"></i> 
-                                                                    <a aria-disabled="true" class="video"> {{$lesson->name}} </a></li>
+                                                                    {{-- <a aria-disabled="true" class="video"> {{$lesson->name}} </a></li> --}}
                                                                 @else
                                                                     <i class="icon-play-circled2"></i> 
-                                                                    <a href="{{$lesson->video}}" class="video"> {{$lesson->name}} </a></li>
-                                                                @endif
+																@endif
+																<a href="{{$lesson->video}}" class="video"> {{$lesson->name}} </a></li>
+																{{-- <a href="https://www.youtube.com/watch?v=eEKfWVvADiQ" class="video"> {{$lesson->name}} </a></li> --}}
                                                         @endforeach
-                                                        {{-- <li><a href="#0" class="txt_doc">{{$chapter->support}}</a><span>00:59</span></li> --}}
+                                                        <li><a href="{{$chapter->support}}" class="txt_doc">Chapter support</a></li>
 
                                                     </ul>
                                                 </div>
