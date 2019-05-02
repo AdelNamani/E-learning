@@ -30,6 +30,7 @@
 				@else 
 			<li><span><a href="#0">{{ Auth::user()->first_name }}  {{Auth::user()->last_name  }} <i class="icon-down-dir"></i> </a></span>
 						<ul>
+							<li><a href="{{ route('profile') }}" >Profile</a></li>
 							<li><a href="{{ route('logout') }}" onclick="event.preventDefault();
 								document.getElementById('logout-form').submit();">Logout</a></li>
 						</ul>

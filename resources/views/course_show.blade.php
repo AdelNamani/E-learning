@@ -9,7 +9,7 @@
 
 <main>
 		<section id="hero_in" class="courses">
-			<div class="wrapper">
+			<div class="wrapper" style="background : url({{$course->photo}}) center center no-repeat;">
 				<div class="container">
 					<h1 class="fadeInUp"><span></span> {{$course->name}}</h1>
 				</div>
@@ -33,7 +33,7 @@
 						<section id="description">
                             <h2>Description</h2>
                             <p>{{$course->description}}</p>
-							<h5>What will you learn</h5>
+							{{-- <h5>What will you learn</h5>
 							<ul class="list_ok">
 								<li>
 									<h6>Suas summo id sed erat erant oporteat</h6>
@@ -47,7 +47,7 @@
 									<h6>Alterum bonorum mentitum an mel</h6>
 									<p>Ut unum diceret eos, mel cu velit principes, ut quo inani dolorem mediocritatem. Mea in justo posidonium necessitatibus.</p>
 								</li>
-							</ul>
+							</ul> --}}
 							<hr>
 							
 							<!-- /row -->

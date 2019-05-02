@@ -9,8 +9,10 @@ class ChapterController extends Controller
 {
 
     public function quiz(Request $request){
+
         $chapter = Chapter::findOrFail($request['id']);
         return view('quiz',['chapter' => $chapter ]);
+
     }
 
     /**
