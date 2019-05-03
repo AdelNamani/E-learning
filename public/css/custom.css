@@ -118,3 +118,21 @@
     }
   }
   
+  .header_box.version_2 {
+    border-bottom: 1px solid #ededed;
+    margin: 0 -30px;
+    padding: 0 30px 10px 30px;
+    margin-bottom: 15px;
+}
+
+  .header_box h2 {
+    font-size: 21px;
+    font-size: 1.3125rem;
+    display: inline-block;
+    margin-top: 5px;
+}
+  .header_box.version_2 i {
+    margin-right: 10px;
+    font-size: inherit;
+    color: #ddd;
+}
