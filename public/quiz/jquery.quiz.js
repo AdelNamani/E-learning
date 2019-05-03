@@ -23,6 +23,7 @@
             nextButtonText = base.options.nextButtonText,
             finishButtonText = base.options.finishButtonText,
             restartButtonText = base.options.restartButtonText,
+            backToCourse = base.options.backToCourse,
             currentQuestion = 1,
             score = 0,
             answerLocked = false;
@@ -65,7 +66,7 @@
                 var quizHtml = '';
 
                 if (base.options.counter) {
-                    quizHtml += '<div id="quiz-counter"></div>';
+                    quizHtml += '<h4 class="nomargin_top" id="quiz-counter"></h4>';
                 }
 
                 quizHtml += '<div id="questions">';
@@ -84,16 +85,17 @@
                 // if results screen not in DOM, add it
                 if ($(resultsScreen).length === 0) {
                     quizHtml += '<div id="' + resultsScreen.substr(1) + '">';
-                    quizHtml += '<p id="quiz-results"></p>';
+                    quizHtml += '<h4 class="nomargin_toh4" id="quiz-results"></p>';
                     quizHtml += '</div>';
                 }
 
                 quizHtml += '<div id="quiz-controls">';
                 quizHtml += '<p id="quiz-response"></p>';
                 quizHtml += '<div id="quiz-buttons">';
-                quizHtml += '<a href="#" id="quiz-next-btn">' + nextButtonText + '</a>';
-                quizHtml += '<a href="#" id="quiz-finish-btn">' + finishButtonText + '</a>';
-                quizHtml += '<a href="#" id="quiz-restart-btn">' + restartButtonText + '</a>';
+                quizHtml += '<a href="#" class="btn_1 rounded" id="quiz-next-btn">' + nextButtonText + '</a>';
+                quizHtml += '<a href="#" class="btn_1 rounded" id="quiz-finish-btn">' + finishButtonText + '</a>';
+                // quizHtml += '<a href="#" id="quiz-restart-btn">' + restartButtonText + '</a>';
+                quizHtml += '<a class="btn_1 rounded" href=" '+ backToCourse + '" id="quiz-restart-btn"> Back to Course </a>';
                 quizHtml += '</div>';
                 quizHtml += '</div>';
 
@@ -109,10 +111,14 @@
                 base.$el.removeClass('quiz-start-state').addClass('quiz-questions-state');
                 $(startScreen).hide();
                 $('#quiz-controls').hide();
+                $('#quiz-start-btn').hide();
                 $('#quiz-finish-btn').hide();
                 $('#quiz-restart-btn').hide();
                 $('#questions').show();
                 $('#quiz-counter').show();
+                $('html, body').animate({
+                    scrollTop: ($('#quiz').offset().top) - 100 + 'px'
+                }, 500);
                 $('.question-container:first-child').show().addClass('active-question');
                 base.methods.updateCounter();
             },
@@ -238,7 +244,7 @@
             },
             updateCounter: function() {
                 var countStr = base.options.counterFormat.replace('%current', currentQuestion).replace('%total', numQuestions);
-                $('#quiz-counter').html(countStr);
+                $('#quiz-counter').html('Progress : ' + countStr);
             }
         };
 

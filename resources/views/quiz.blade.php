@@ -13,7 +13,8 @@
 		<section id="hero_in" class="general">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp"><span></span>Quiz </h1>
+                    <h1 class="fadeInUp"><span></span>Quiz - {{$chapter->name}}</h1>
+                    <a href="#" id="quiz-start-btn" class="btn_1 rounded">Start Quiz</a>
 				</div>
 			</div>
 		</section>
@@ -22,7 +23,7 @@
 		<div class="container margin_60_35">
 			<div class="row">
 				<div class="col-lg-10" id="faq">
-                    <h4 class="nomargin_top">Quiz</h4>
+                    {{-- <h4 class="nomargin_top">Quiz </h4> --}}
                     {{--<form action="" method="post">
                         <div role="tablist" class="add_bottom_45 accordion_2" id="payment">
                             @foreach($chapter->questions as $question)
@@ -54,14 +55,12 @@
                         <button type="submit" class="btn_1 rounded">Submit Quiz</button>
                     </form>	--}}
                     <div id="quiz">
-                        <div id="quiz-header">
+                        {{-- <div id="quiz-header">
                             <h1>Quiz Example</h1>
                             <p><a id="quiz-home-btn">Quiz Home</a></p>
-                        </div>
+                        </div> --}}
                         <div id="quiz-start-screen">
-                            <p>
-                                <a href="#" id="quiz-start-btn" class="quiz-button">Start Quiz</a>
-                            </p>
+            
                         </div>
                     </div>
 				</div>
@@ -85,7 +84,7 @@
             @endphp
             @foreach($chapter->questions as $question)
             {
-                'q': '{{$question->statement}}',
+                'q': '{{$question->statement}} ?',
                 'options': [
                     @foreach($question->propositions as $proposition)
                     '{{$proposition->statement}}',
@@ -97,8 +96,8 @@
                     @endforeach
                 ],
                 'correctIndex':{{$correct_index}} ,
-                'correctResponse': 'Well done !',
-                'incorrectResponse': 'Bad answer'
+                // 'correctResponse': 'Well done !',
+                // 'incorrectResponse': 'Bad answer !'
             },
             @endforeach
 
@@ -127,7 +126,7 @@
             nextButtonText: 'Next',
             finishButtonText: 'Finish',
             restartButtonText: 'Restart',
-
+            backToCourse : "{{route('course.show' , ['id' => $chapter->course->id ])}}" ,
             answerCallback: function(){
             // do something
             },
