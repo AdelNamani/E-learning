@@ -1,6 +1,10 @@
 
 @extends('layouts.default' , ['id' => null ])
 
+@section('css')
+    <link rel="stylesheet" href="{{asset('quiz/jquery.quiz.css')}}">
+@endsection
+
 @section('content')
 
 @include('partials.header')
@@ -19,7 +23,7 @@
 			<div class="row">
 				<div class="col-lg-10" id="faq">
                     <h4 class="nomargin_top">Quiz</h4>
-                    <form action="" method="post">
+                    {{--<form action="" method="post">
                         <div role="tablist" class="add_bottom_45 accordion_2" id="payment">
                             @foreach($chapter->questions as $question)
                             <div class="card">
@@ -48,7 +52,18 @@
                             @endforeach
                         </div>	
                         <button type="submit" class="btn_1 rounded">Submit Quiz</button>
-                    </form>				
+                    </form>	--}}
+                    <div id="quiz">
+                        <div id="quiz-header">
+                            <h1>Quiz Example</h1>
+                            <p><a id="quiz-home-btn">Quiz Home</a></p>
+                        </div>
+                        <div id="quiz-start-screen">
+                            <p>
+                                <a href="#" id="quiz-start-btn" class="quiz-button">Start Quiz</a>
+                            </p>
+                        </div>
+                    </div>
 				</div>
 				<!-- /col -->
 			</div>
@@ -58,5 +73,94 @@
 	</main>
 
 @include('partials.footer')
-    
+
+@endsection
+
+@section('js')
+    <script src="{{asset('quiz/jquery.quiz.js')}}"></script>
+    <script>
+        const myQuiz = [
+            @php
+                $correct_index = 0;
+            @endphp
+            @foreach($chapter->questions as $question)
+            {
+                'q': '{{$question->statement}}',
+                'options': [
+                    @foreach($question->propositions as $proposition)
+                    '{{$proposition->statement}}',
+                        @if($proposition->is_correct)
+                            @php
+                                $correct_index = $loop->index
+                            @endphp
+                        @endif
+                    @endforeach
+                ],
+                'correctIndex':{{$correct_index}} ,
+                'correctResponse': 'Well done !',
+                'incorrectResponse': 'Bad answer'
+            },
+            @endforeach
+
+        ];
+
+        $('#quiz').quiz({
+
+            questions: myQuiz,
+
+            // allows incorrect options
+            allowIncorrect: true,
+
+            // counter settings
+            counter: true,
+            counterFormat: '%current/%total',
+
+            // default selectors & format
+            startScreen: '#quiz-start-screen',
+            startButton: '#quiz-start-btn',
+            homeButton: '#quiz-home-btn',
+            resultsScreen: '#quiz-results-screen',
+            resultsFormat: 'You got %score out of %total correct!',
+            gameOverScreen: '#quiz-gameover-screen',
+
+            // button text
+            nextButtonText: 'Next',
+            finishButtonText: 'Finish',
+            restartButtonText: 'Restart',
+
+            answerCallback: function(){
+            // do something
+            },
+
+            nextCallback: function(){
+            // do something
+            },
+
+            finishCallback: function(score){
+                console.log(score);
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                    type: "POST",
+                    url : '{{route('chapter.quizSubmit',['id'=>$chapter->id])}}',
+                    data : {
+                        'score' : score,
+                    },
+                    success : function (date){
+                        console.log(data);
+                    },
+                    error : function(data){
+                        console.log(data);
+                    }
+
+                })
+            },
+
+            homeCallback: function(){
+            // do something
+            },
+
+        });
+
+    </script>
+
 @endsection

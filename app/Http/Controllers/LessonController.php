@@ -89,8 +89,6 @@ class LessonController extends Controller
         $user = Auth::user();
         $lesson = Lesson::findOrFail($request['id']);
         $lesson->users()->attach($user->id);
-        return redirect(route('lesson.show',['id' => $request['id']]));
-        /** TODo : Redirection to the next lesson */
-
+        return response(200);
     }
 }

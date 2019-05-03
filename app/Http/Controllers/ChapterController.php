@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Chapter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChapterController extends Controller
 {
@@ -13,6 +14,14 @@ class ChapterController extends Controller
         $chapter = Chapter::findOrFail($request['id']);
         return view('quiz',['chapter' => $chapter ]);
 
+    }
+
+    public function quizSubmit(Request $request){
+        $user =Auth::user();
+        $chapter = Chapter::findOrFail($request['id']);
+        $chapter->users()->detach($user->id);
+        $chapter->users()->attach($user->id , ['score' => $request['score']]);
+        return response(200);
     }
 
     /**

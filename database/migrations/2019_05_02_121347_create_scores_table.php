@@ -19,7 +19,7 @@ class CreateScoresTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('chapter_id')->references('id')->on('chapters');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('score');
+            $table->float('score');
             $table->timestamps();
         });
     }

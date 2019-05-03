@@ -21,13 +21,15 @@ Route::get('/course/{id}' , 'CourseController@show')->name('course.show')->middl
 
 /**----------------------------------------------------------------------------------------------------------------**/
 
-Route::get('/lesson/{id}','LessonController@show')->name('lesson.show');
+Route::get('/lesson/{id}','LessonController@show')->name('lesson.show')->middleware('auth');
 
-Route::get('/lesson/{id}/complete','LessonController@complete')->name('lesson.complete');
+Route::get('/lesson/{id}/complete','LessonController@complete')->name('lesson.complete')->middleware('auth');
 
 /**----------------------------------------------------------------------------------------------------------------**/
 
-Route::get('/chapter/{id}/quiz','ChapterController@quiz')->name('chapter.quiz');
+Route::get('/chapter/{id}/quiz','ChapterController@quiz')->name('chapter.quiz')->middleware('auth');
+
+Route::post('/chapter/{id}/quiz','ChapterController@quizSubmit')->name('chapter.quizSubmit')->middleware('auth');
 
 /**----------------------------------------------------------------------------------------------------------------**/
 

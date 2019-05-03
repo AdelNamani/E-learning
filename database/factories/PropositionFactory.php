@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Proposition::class, function (Faker $faker) {
     return [
         'statement' => $faker->sentence,
-        'question_id' => rand(3,12)
+        'question_id' => rand(1,10),
+        'is_correct' => $faker->boolean
     ];
 });

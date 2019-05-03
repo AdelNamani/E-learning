@@ -17,9 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('statement');
             $table->unsignedBigInteger('chapter_id');
-            $table->unsignedBigInteger('proposition_id');
             $table->foreign('chapter_id')->references('id')->on('chapters');
-            //$table->foreign('proposition_id')->references('id')->on('proposition');
             $table->timestamps();
 
         });

@@ -19,6 +19,7 @@
     <link href="{{asset('css/icon_fonts/css/all_icons.min.css')}}" rel="stylesheet">
     <!-- YOUR CUSTOM CSS -->
     <link href="{{asset('css/custom.css')}}" rel="stylesheet">
+    @yield('css')
 
 </head>
 
