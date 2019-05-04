@@ -6,7 +6,8 @@ use App\Course;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\CourseRequest;
+use Storage;
 class CourseController extends Controller
 {
     /**
@@ -19,6 +20,8 @@ class CourseController extends Controller
         $courses = Course::all();
         foreach ($courses as $course){
             $course->teacher = $course->user->first_name.' '.$course->user->last_name;
+            $course->photo  = Storage::url('uploads/'.$course->photo);
+
         }
         return view('home' , ['courses'=>$courses]);
     }
@@ -30,7 +33,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('create') ; 
     }
 
     /**
@@ -39,11 +42,24 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
-        //
-    }
-
+        //  
+            $course = Course::create([
+                'name' => $request['name'] , 
+                'description' => $request['description']  , 
+                'user_id' => Auth::user()->id 
+            ]) ;
+            if($request->hasFile('photo')) {
+                $image = $request->file('photo');
+                $name = $course->id . '.' . $image->getClientOriginalExtension();
+                $path = Storage::disk('public')->putFileAs('uploads', $image , $name);
+                $course->photo =  $name  ; 
+            }
+            $course->save() ;
+            return redirect(route('course.show' , ['id' => $course->id ])) ;
+        }
+    
     /**
      * Display the specified resource.
      *
