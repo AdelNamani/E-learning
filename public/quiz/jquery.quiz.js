@@ -57,7 +57,7 @@
                     base.methods.finish();
                 });
 
-                $(document).on('click', '#quiz-restart-btn, #quiz-retry-btn', function(e) {
+                $(document).on('click', '#quiz-retry-btn', function(e) {
                     e.preventDefault();
                     base.methods.restart();
                 });
