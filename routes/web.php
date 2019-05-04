@@ -31,6 +31,12 @@ Route::get('/chapter/{id}/quiz','ChapterController@quiz')->name('chapter.quiz')-
 
 Route::post('/chapter/{id}/quiz','ChapterController@quizSubmit')->name('chapter.quizSubmit')->middleware(['auth','verified']);
 
+Route::get('/chapter/{id}/quiz/create','ChapterController@quizCreate')->name('chapter.quizCreate')->middleware(['auth','verified','teacher']);
+
+Route::post('/proposition/add','ChapterController@propositionAdd')->name('proposition.add')->middleware(['auth','verified','teacher']);
+
+Route::post('/question/add','ChapterController@questionAdd')->name('question.add')->middleware(['auth','verified','teacher']);
+
 /**----------------------------------------------------------------------------------------------------------------**/
 
 Route::get('/profile','UserController@show')->name('profile')->middleware('auth');
