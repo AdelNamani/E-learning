@@ -48,8 +48,7 @@
                             {{ __('Forgot Your Password?') }}
                     </strong>
                 </a>
-
-@endif
+                @endif
                 {{-- <label class="form-check-label" for="remember">
                         {{ __('Remember Me') }}
                 </label> --}}
