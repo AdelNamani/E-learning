@@ -17,7 +17,13 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'CourseController@index')->name('home');
 
+Route::post('/course/create' , 'CourseController@store')->name('course.store')->middleware(['auth','verified' ,'teacher']);
+
+Route::get('/course/create' , 'CourseController@create')->name('course.create')->middleware(['auth','verified' ,'teacher']);
+
 Route::get('/course/{id}' , 'CourseController@show')->name('course.show')->middleware(['auth','verified']);
+
+
 
 /**----------------------------------------------------------------------------------------------------------------**/
 
@@ -43,5 +49,5 @@ Route::post('/profile/update_password','UserController@update_password')->name('
 
 /**----------------------------------------------------------------------------------------------------------------**/
 
-
+Route::get('/teacher' , 'TeacherController@index')->name('teacher.dash')->middleware(['auth' , 'verified' ,'teacher']) ; 
 

@@ -66,7 +66,7 @@
                                 <div class="block-horizzontal"></div>
                                 <a href="{{route('course.show',['id'=>$course->id])}}" ><img 
                                     @if ($course->photo)
-                                        src="{{$course->photo}}"
+                                        src="{{asset($course->photo)}}"
                                     @else
                                         src="{{asset('img/defaultCoursePicture.jpg')}}"
                                     @endif

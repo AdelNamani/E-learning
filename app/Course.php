@@ -3,9 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Course extends Model
 {
+    use Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name' , 'description' ,'user_id'
+    ];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
