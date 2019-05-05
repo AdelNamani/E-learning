@@ -18,7 +18,7 @@ class CreateChaptersTable extends Migration
             $table->string('name');
             $table->string('support')->nullable();
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -79,10 +79,10 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit(Request $request)
     {
-        //
-        return view('editCourse' , ['course' => $course ]) ;
+        $course = Course::find($request['id']);
+        return view('course_edit' , ['course' => $course ]) ;
     }
 
     /**
@@ -92,9 +92,19 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request)
     {
-        //
+        $course = Course::find($request['id']);
+        $course->name = $request['name'] ;
+        $course->description = $request['description'] ;
+        if($request->hasFile('photo')) {
+            $image = $request->file('photo');
+            $name = $course->id . '.' . $image->getClientOriginalExtension();
+            $path = Storage::disk('public')->putFileAs('uploads', $image , $name);
+            $course->photo =  $name  ; 
+        }
+        $course->save() ;
+        return redirect(route('course.show' , ['id' => $course->id ])) ;
     }
 
     /**
@@ -103,9 +113,11 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Request $request)
     {
-        //
+        $course = Course::find($request['id']);
+        $course->delete() ;
+        return redirect(route('teacher.courses')) ;
     }
 
 }

@@ -25,6 +25,10 @@ Route::get('/course/{id}' , 'CourseController@show')->name('course.show')->middl
 
 Route::get('/course/edit/{id}' , 'CourseController@edit')->name('course.edit')->middleware(['auth','verified' , 'teacher']);
 
+Route::post('/course/edit/{id}' , 'CourseController@update')->name('course.update')->middleware(['auth','verified' , 'teacher']);
+
+Route::get('/course/delete/{id}' , 'CourseController@destroy')->name('course.delete')->middleware(['auth','verified' , 'teacher']);
+
 
 
 /**----------------------------------------------------------------------------------------------------------------**/

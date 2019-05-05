@@ -19,8 +19,8 @@ class CreateCoursesTable extends Migration
             $table->text('description');
             $table->string('photo')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();            
         });
     }
 

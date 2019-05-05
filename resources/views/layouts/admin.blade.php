@@ -39,7 +39,7 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="{{route('course.create')}}">
-              <i class="fa fa-fw fa-dashboard"></i>
+              <i class="fa fa-plus"></i>
               <span class="nav-link-text">Add Course</span>
           </a>
         </li>

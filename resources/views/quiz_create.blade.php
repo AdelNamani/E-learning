@@ -23,7 +23,9 @@
                             <div class="card">
                                 <div class="card-header" role="tab">
                                     <h5 class="mb-0">
-                                        <a data-toggle="collapse" :href=" '#'+ question.id" aria-expanded="true"><i class="indicator fa fa-caret-down"></i> @{{question.statement}}</a>
+                                        <a style="display : inline ;" data-toggle="collapse" :href=" '#'+ question.id" aria-expanded="true"><i class="indicator fa fa-caret-down"></i> @{{question.statement}}</a>
+                                        <a style="display : inline ;" href="google.com"><i class=" indicator fa fa-edit"></i></a>
+                                        <a style="display : inline ;" href="google.com"><i class=" indicator fa fa-trash"></i></a>
                                     </h5>
                                 </div>
     
@@ -31,7 +33,10 @@
                                     <div class="card-body">
                                             <p v-for="proposition in question.propositions">
                                                     @{{proposition.statement}}
+                                                    <a style="display : inline ;" href="google.com"><i class=" indicator fa fa-edit"></i></a>
+                                                    <a style="display : inline ;" href="google.com"><i class=" indicator fa fa-trash"></i></a>
                                             </p>
+    
                                     </div>
                                 </div>
                             </div>      
