@@ -9,7 +9,7 @@
 
 <main>
 		<section id="hero_in" class="courses">
-			<div class="wrapper" style="background : url({{$course->photo}}) center center no-repeat;">
+			<div class="wrapper" style="background : url({{asset("storage/".$course->photo)}}) center center no-repeat;">
 				<div class="container">
 					<h1 class="fadeInUp"><span></span> {{$course->name}}</h1>
 				</div>

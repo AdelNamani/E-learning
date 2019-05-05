@@ -12,6 +12,7 @@
         </div>
         <form enctype="multipart/form-data" action='{{route("course.update" , ['id' => $course->id ])}}' method="POST">
             @csrf
+            {{ method_field('patch') }}
             <div class="row">
                 <div class="col-md-10">
                     <div class="form-group">

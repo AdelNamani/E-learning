@@ -27,7 +27,11 @@ class CourseRequest extends FormRequest
         return [
             "name"=>"required|max:50|min:10",
             "description"=>"required|max:300|min:20",
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'photo' => 'image|mimes:jpeg,png,jpg',
+            /**TODO : Validate image dimensions
+             * check that :
+             * https://itsolutionstuff.com/post/laravel-53-image-dimension-validation-rules-exampleexample.html
+             */
         ];
     }
 }

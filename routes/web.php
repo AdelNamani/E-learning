@@ -23,13 +23,13 @@ Route::get('/course/create' , 'CourseController@create')->name('course.create')-
 
 Route::get('/course/{id}' , 'CourseController@show')->name('course.show')->middleware(['auth','verified']);
 
-Route::get('/course/edit/{id}' , 'CourseController@edit')->name('course.edit')->middleware(['auth','verified' , 'teacher']);
+Route::get('/course/{id}/edit' , 'CourseController@edit')->name('course.edit')->middleware(['auth','verified' , 'teacher']);
 
-Route::post('/course/edit/{id}' , 'CourseController@update')->name('course.update')->middleware(['auth','verified' , 'teacher']);
+Route::patch('/course/{id}' , 'CourseController@update')->name('course.update')->middleware(['auth','verified' , 'teacher']);
 
-Route::get('/course/delete/{id}' , 'CourseController@destroy')->name('course.delete')->middleware(['auth','verified' , 'teacher']);
+Route::delete('/course/{id}' , 'CourseController@destroy')->name('course.delete')->middleware(['auth','verified' , 'teacher']);
 
-Route::get('/course/details/{id}' , 'CourseController@details')->name('course.details')->middleware(['auth','verified' , 'teacher']);
+Route::get('/course/{id}/details' , 'CourseController@details')->name('course.details')->middleware(['auth','verified' , 'teacher']);
 
 
 
