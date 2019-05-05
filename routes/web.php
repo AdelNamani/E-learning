@@ -41,15 +41,19 @@ Route::get('/lesson/{id}/complete','LessonController@complete')->name('lesson.co
 
 /**----------------------------------------------------------------------------------------------------------------**/
 
-Route::get('/chapter/{id}/quiz','ChapterController@quiz')->name('chapter.quiz')->middleware(['auth','verified']);
+Route::get('/chapter/{id}/quiz','QuizController@quiz')->name('chapter.quiz')->middleware(['auth','verified']);
 
-Route::post('/chapter/{id}/quiz','ChapterController@quizSubmit')->name('chapter.quizSubmit')->middleware(['auth','verified']);
+Route::post('/chapter/{id}/quiz','QuizController@quizSubmit')->name('chapter.quizSubmit')->middleware(['auth','verified']);
 
-Route::get('/chapter/{id}/quiz/create','ChapterController@quizCreate')->name('chapter.quizCreate')->middleware(['auth','verified','teacher']);
+Route::get('/chapter/{id}/quiz/create','QuizController@quizCreate')->name('chapter.quizCreate')->middleware(['auth','verified','teacher']);
 
-Route::post('/proposition/add','ChapterController@propositionAdd')->name('proposition.add')->middleware(['auth','verified','teacher']);
+Route::post('/proposition/add','QuizController@propositionAdd')->name('proposition.add')->middleware(['auth','verified','teacher']);
 
-Route::post('/question/add','ChapterController@questionAdd')->name('question.add')->middleware(['auth','verified','teacher']);
+Route::post('/question/add','QuizController@questionAdd')->name('question.add')->middleware(['auth','verified','teacher']);
+
+Route::delete('/proposition/{id}','QuizController@propositionDelete')->name('proposition.delete')->middleware(['auth','verified','teacher']);
+
+Route::delete('/question/{id}','QuizController@questionDelete')->name('question.delete')->middleware(['auth','verified','teacher']);
 
 /**----------------------------------------------------------------------------------------------------------------**/
 

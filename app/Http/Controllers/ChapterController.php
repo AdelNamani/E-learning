@@ -11,45 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class ChapterController extends Controller
 {
 
-    public function quiz(Request $request){
 
-        $chapter = Chapter::findOrFail($request['id']);
-        return view('quiz',['chapter' => $chapter ]);
-
-    }
-
-    public function quizSubmit(Request $request){
-        $user =Auth::user();
-        $chapter = Chapter::findOrFail($request['id']);
-        $chapter->users()->detach($user->id);
-        $chapter->users()->attach($user->id , ['score' => $request['score']]);
-        return response(200);
-    }
-
-    public function quizCreate(Request $request){
-        $chapter = Chapter::findOrFail($request['id']);
-        return view('quiz_create',['chapter'=>$chapter]);
-    }
-
-    public function propositionAdd(Request $request){
-        $proposition = new Proposition();
-        $proposition->statement = $request['statement'];
-        $proposition->question_id = $request['question_id'];
-        $proposition->is_correct = $request['is_correct'];
-
-        $proposition->save();
-        return response(200);
-    }
-
-    public function questionAdd(Request $request){
-        $question = new Question();
-        $question->statement = $request['statement'];
-        $question->chapter_id = $request['chapter_id'];
-
-        $question->save();
-        $id = $question->id;
-        return response(json_encode($id));
-    }
 
     /**
      * Display a listing of the resource.

@@ -1,64 +1,65 @@
 @extends('layouts.admin')
 @section('css')
-<link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
 @endsection
 @section('content')
 
-<div class="box_general padding_bottom">
+    <div class="box_general padding_bottom">
         <div class="header_box version_2">
             <h2><i class="fa fa-file"></i>Create a quiz for {{$chapter->name}}</h2>
         </div>
-                <div class="row">
-                    <div class="col-lg-10" id="quizCreator">
-                        {{-- <h2 class="nomargin_top">Questions :</h2> --}}
-                        <div class="form-group">
-                            <label>Add question :</label>
-                            <input class="form-control" type="text" v-model="new_question">
+        <div class="row">
+            <div class="col-lg-10" id="quizCreator">
+                {{-- <h2 class="nomargin_top">Questions :</h2> --}}
+                <div class="form-group">
+                    <label>Add question :</label>
+                    <input class="form-control" type="text" v-model="new_question">
+                </div>
+                <button v-on:click="add_question()" class="btn_1 medium">Add</button>
+                <br>
+                <br>
+                <div role="tablist" class="add_bottom_45 accordion_2" id="tips" v-for="(question , index) in questions">
+                    <div class="card">
+                        <div class="card-header" role="tab">
+                            <h5 class="mb-0">
+                                <a style="display : inline ;" data-toggle="collapse" :href=" '#'+ question.id"
+                                   aria-expanded="true"><i class="indicator fa fa-caret-down"></i>
+                                    @{{question.statement}}</a>
+                                <a v-on:click="delete_question(index)" style="display : inline ;" ><i class=" indicator fa fa-trash"></i></a>
+                            </h5>
                         </div>
-                        <button v-on:click="add_question()" class="btn_1 medium">Add</button>
-                        <br>
-                        <br>
-                        <div role="tablist" class="add_bottom_45 accordion_2" id="tips" v-for="(question , index) in questions">
-                            <div class="card">
-                                <div class="card-header" role="tab">
-                                    <h5 class="mb-0">
-                                        <a style="display : inline ;" data-toggle="collapse" :href=" '#'+ question.id" aria-expanded="true"><i class="indicator fa fa-caret-down"></i> @{{question.statement}}</a>
-                                        <a style="display : inline ;" href="google.com"><i class=" indicator fa fa-edit"></i></a>
-                                        <a style="display : inline ;" href="google.com"><i class=" indicator fa fa-trash"></i></a>
-                                    </h5>
-                                </div>
-    
-                                <div :id="question.id" class="collapse show" role="tabpanel" data-parent="#payment">
-                                    <div class="card-body">
-                                            <p v-for="proposition in question.propositions">
-                                                    @{{proposition.statement}}
-                                                    <a style="display : inline ;" href="google.com"><i class=" indicator fa fa-edit"></i></a>
-                                                    <a style="display : inline ;" href="google.com"><i class=" indicator fa fa-trash"></i></a>
-                                            </p>
-    
-                                    </div>
-                                </div>
-                            </div>      
-                            <div class="form-group">
-                                <label> Add a proposition</label>    
-                                <input class="form-control" type="text" v-model="question.new_proposition">
-                            </div>                
-                            <div class="form-group">
-                                <label>
-                                        Correct : 
-                                </label>
-                                <input type="checkbox" v-model="question.new_proposition_correct">
+
+                        <div :id="question.id" class="collapse show" role="tabpanel" data-parent="#payment">
+                            <div class="card-body">
+                                <p v-for="(proposition,indexP) in question.propositions">
+                                    @{{proposition.statement}}
+                                    <a v-on:click="delete_proposition(index,indexP)" style="display : inline ;" ><i
+                                                class=" indicator fa fa-trash"></i></a>
+                                </p>
+
                             </div>
-    
-                            <button v-on:click="add_proposition(index)" class="btn_1 medium">Add</button>
-    
-                            <br>
-    
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label> Add a proposition</label>
+                        <input class="form-control" type="text" v-model="question.new_proposition">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Correct :
+                        </label>
+                        <input type="checkbox" v-model="question.new_proposition_correct">
+                    </div>
+
+                    <button v-on:click="add_proposition(index)" class="btn_1 medium">Add</button>
+
+                    <br>
+
                 </div>
-</div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -68,7 +69,7 @@
         const app = new Vue({
             el: "#quizCreator",
             data: {
-                new_question : '',
+                new_question: '',
                 questions: [
                         @foreach($chapter->questions as $question)
                     {
@@ -77,6 +78,7 @@
                         propositions: [
                                 @foreach($question->propositions as $proposition)
                             {
+                                id : {{$proposition->id}},
                                 statement: '{{$proposition->statement}}',
                                 is_correct: {{$proposition->is_correct}}
                             },
@@ -90,7 +92,7 @@
             },
             methods: {
                 add_proposition: function (question_index) {
-                    let con = true
+                    let con = true;
                     console.log(question_index);
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
@@ -124,7 +126,7 @@
 
                 add_question: function () {
                     let con = true;
-                    let id = null
+                    let id = null;
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "POST",
@@ -145,13 +147,11 @@
                         }
 
                     });
-                    if (con){
+                    if (con) {
                         this.questions.push({
-                            id : id,
-                            statement : this.new_question,
-                            propositions : [
-
-                            ],
+                            id: id,
+                            statement: this.new_question,
+                            propositions: [],
                             new_proposition: '',
                             new_proposition_correct: false,
                         });
@@ -159,6 +159,46 @@
 
                     this.new_question = '';
 
+                },
+
+                delete_proposition : function (question_index,proposition_index) {
+                    let con = true;
+                    let id  = this.questions[question_index].propositions[proposition_index].id;
+                    $.ajax({
+                        headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+                        type: "DELETE",
+                        url: '/proposition/'+id,
+                        success: function (data) {
+                            console.log('success');
+                        },
+                        error: function (data) {
+                            console.log('error');
+                            con = false
+                        },
+                    });
+                    if (con){
+                        this.questions[question_index].propositions.splice(proposition_index,1);
+                    }
+                },
+
+                delete_question : function (question_index) {
+                    let con = true;
+                    let id  = this.questions[question_index].id;
+                    $.ajax({
+                        headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+                        type: "DELETE",
+                        url: '/question/'+id,
+                        success: function (data) {
+                            console.log('success');
+                        },
+                        error: function (data) {
+                            console.log('error');
+                            con = false
+                        },
+                    });
+                    if (con){
+                        this.questions.splice(question_index,1);
+                    }
                 }
             }
         });
