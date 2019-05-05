@@ -126,7 +126,7 @@
             nextButtonText: 'Next',
             finishButtonText: 'Finish',
             restartButtonText: 'Restart',
-            backToCourse : "{{route('course.show' , ['id' => $chapter->course->id ])}}" ,
+            backToCourse : '{{route("course.show" , ["id" => $chapter->course->id ])}}' ,
             answerCallback: function(){
             // do something
             },

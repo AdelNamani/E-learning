@@ -1,59 +1,59 @@
-@extends('layouts.default' , ['id' => null ])
+@extends('layouts.admin')
+@section('css')
+<link href="{{asset('css/style.css')}}" rel="stylesheet">
 
+@endsection
 @section('content')
 
-    @include('partials.header')
-
-    <main xmlns:v-on="http://www.w3.org/1999/xhtml">
-        <section id="hero_in" class="general">
-            <div class="wrapper">
-                <div class="container">
-                    <h1 class="fadeInUp"><span></span>Create a quiz for {{$chapter->name}}</h1>
-                    <a href="#" id="quiz-start-btn" class="btn_1 rounded">Start</a>
-                </div>
-            </div>
-        </section>
-
-        <div class="container margin_60_35">
-            <div class="row">
-                <div class="col-lg-10" id="quizCreator">
-                    <h2>Questions :</h2>
-
-                    <label>Add question :</label>
-                    <input type="text" v-model="new_question">
-                    <button v-on:click="add_question()">Add</button>
-
-                    <br>
-                    <ul v-for="(question , index) in questions">
-
-                        <h4>Question :</h4>
-
-                        <li> @{{question.statement}}</li>
-
-                        <h4>Propositions :</h4>
-
-                        <ul v-for="proposition in question.propositions">
-
-                            <li v-text="proposition.statement"></li>
-
-                        </ul>
-
-                        <input type="text" v-model="question.new_proposition" placeholder="Add a proposition">
-
-                        Correct : <input type="checkbox" v-model="question.new_proposition_correct">
-
-                        <button v-on:click="add_proposition(index)">Add</button>
-
-                        <br>
-
-                    </ul>
-                </div>
-            </div>
+<div class="box_general padding_bottom">
+        <div class="header_box version_2">
+            <h2><i class="fa fa-file"></i>Create a quiz for {{$chapter->name}}</h2>
         </div>
-
-    </main>
-
-    @include('partials.footer')
+                <div class="row">
+                    <div class="col-lg-10" id="quizCreator">
+                        {{-- <h2 class="nomargin_top">Questions :</h2> --}}
+                        <div class="form-group">
+                            <label>Add question :</label>
+                            <input class="form-control" type="text" v-model="new_question">
+                        </div>
+                        <button v-on:click="add_question()" class="btn_1 medium">Add</button>
+                        <br>
+                        <br>
+                        <div role="tablist" class="add_bottom_45 accordion_2" id="tips" v-for="(question , index) in questions">
+                            <div class="card">
+                                <div class="card-header" role="tab">
+                                    <h5 class="mb-0">
+                                        <a data-toggle="collapse" :href=" '#'+ question.id" aria-expanded="true"><i class="indicator fa fa-caret-down"></i> @{{question.statement}}</a>
+                                    </h5>
+                                </div>
+    
+                                <div :id="question.id" class="collapse show" role="tabpanel" data-parent="#payment">
+                                    <div class="card-body">
+                                            <p v-for="proposition in question.propositions">
+                                                    @{{proposition.statement}}
+                                            </p>
+                                    </div>
+                                </div>
+                            </div>      
+                            <div class="form-group">
+                                <label> Add a proposition</label>    
+                                <input class="form-control" type="text" v-model="question.new_proposition">
+                            </div>                
+                            <div class="form-group">
+                                <label>
+                                        Correct : 
+                                </label>
+                                <input type="checkbox" v-model="question.new_proposition_correct">
+                            </div>
+    
+                            <button v-on:click="add_proposition(index)" class="btn_1 medium">Add</button>
+    
+                            <br>
+    
+                        </div>
+                    </div>
+                </div>
+</div>
 
 @endsection
 

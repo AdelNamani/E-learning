@@ -1,1 +1,4 @@
-/* YOUR CUSTOM CSS */
+footer.sticky-footer { 
+    color: #777 !important;
+    background-color: #f8f8f8 ;
+}

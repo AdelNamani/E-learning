@@ -9,6 +9,7 @@
   <meta name="author" content="ZELLAT Abdelkhalek - Adel NAMANI">
   <title>CUFA - Teacher dashboard</title>
 
+  @yield('css')
   <!-- Bootstrap core CSS-->
 <link href="{{asset('admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <!-- Main styles -->
@@ -19,7 +20,6 @@
   {{-- <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"> --}}
   <!-- Your custom styles -->
 <link href="{{asset('admin/css/custom.css')}}" rel="stylesheet">
-	
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">
@@ -93,6 +93,6 @@
 <script src="{{asset('admin/js/admin.js')}}"></script>
 	<!-- Custom scripts for this page-->
 {{-- <script src="{{asset('admin/js/admin-charts.js')}}"></script> --}}
-	
+	@yield('js')
 </body>
 </html>
