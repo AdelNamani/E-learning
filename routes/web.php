@@ -23,6 +23,8 @@ Route::get('/course/create' , 'CourseController@create')->name('course.create')-
 
 Route::get('/course/{id}' , 'CourseController@show')->name('course.show')->middleware(['auth','verified']);
 
+Route::get('/course/edit/{id}' , 'CourseController@edit')->name('course.edit')->middleware(['auth','verified' , 'teacher']);
+
 
 
 /**----------------------------------------------------------------------------------------------------------------**/
@@ -55,5 +57,6 @@ Route::post('/profile/update_password','UserController@update_password')->name('
 
 /**----------------------------------------------------------------------------------------------------------------**/
 
-Route::get('/teacher' , 'TeacherController@index')->name('teacher.dash')->middleware(['auth' , 'verified' ,'teacher']) ; 
+Route::get('/teacher' , 'TeacherController@index')->name('teacher.courses')->middleware(['auth' , 'verified' ,'teacher']) ; 
+
 

@@ -32,9 +32,15 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-        <a class="nav-link" href="{{route('course.create')}}">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Add Course</span>
+          <a class="nav-link" href="{{route('teacher.courses')}}">
+              <i class="fa fa-fw fa-dashboard"></i>
+              <span class="nav-link-text">My Courses</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="{{route('course.create')}}">
+              <i class="fa fa-fw fa-dashboard"></i>
+              <span class="nav-link-text">Add Course</span>
           </a>
         </li>
       </ul>
