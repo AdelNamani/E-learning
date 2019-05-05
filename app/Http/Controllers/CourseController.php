@@ -21,8 +21,6 @@ class CourseController extends Controller
         $courses = Course::all();
         foreach ($courses as $course) {
             $course->teacher = $course->user->first_name . ' ' . $course->user->last_name;
-            $course->photo = Storage::url('uploads/' . $course->photo);
-
         }
         return view('home', ['courses' => $courses]);
     }
