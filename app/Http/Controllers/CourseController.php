@@ -120,4 +120,10 @@ class CourseController extends Controller
         return redirect(route('teacher.courses')) ;
     }
 
+    public function details(Request $request)
+    {
+        $course = Course::find($request['id']);
+        $chapters = $course->chapters ;
+        return view('course_details' , ['chapters' => $chapters ]) ;
+    }
 }

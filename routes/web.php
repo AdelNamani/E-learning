@@ -29,6 +29,8 @@ Route::post('/course/edit/{id}' , 'CourseController@update')->name('course.updat
 
 Route::get('/course/delete/{id}' , 'CourseController@destroy')->name('course.delete')->middleware(['auth','verified' , 'teacher']);
 
+Route::get('/course/details/{id}' , 'CourseController@details')->name('course.details')->middleware(['auth','verified' , 'teacher']);
+
 
 
 /**----------------------------------------------------------------------------------------------------------------**/

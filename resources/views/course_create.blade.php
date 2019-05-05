@@ -1,11 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
-    {{--
-        <button  >Submit</button>
-     --}}
-
     <div class="box_general padding_bottom">
         <div class="header_box version_2">
             <h2><i class="fa fa-file"></i>Course info</h2>

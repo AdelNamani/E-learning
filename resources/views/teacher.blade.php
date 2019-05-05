@@ -31,6 +31,7 @@
                     <h6>Course description</h6> 
                 <p> {{ $course->description }}</p>
                     <ul class="buttons">
+                    <li><a href="{{route('course.details' , ['id' => $course->id ] )}}" class="btn_1 gray"><i class="fa fa-info-circle"></i> Details </a></li>
                     <li><a href="{{route('course.edit' , ['id' => $course->id ] )}}" class="btn_1 gray approve"><i class="fa fa-edit"></i> Edit</a></li>
                     <li><a href="{{route('course.delete' , ['id' => $course->id ] )}}" class="btn_1 gray delete"><i class="fa fa-trash"></i> Delete</a></li>
                         {{-- <li><a href="#0" class="btn_1 gray delete"><i class="fa fa-fw fa-times-circle-o"></i> Cancel</a></li> --}}
