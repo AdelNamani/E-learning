@@ -29,7 +29,7 @@ Route::patch('/course/{id}' , 'CourseController@update')->name('course.update')-
 
 Route::delete('/course/{id}' , 'CourseController@destroy')->name('course.delete')->middleware(['auth','verified' , 'teacher']);
 
-Route::get('/course/{id}/details' , 'CourseController@details')->name('course.details')->middleware(['auth','verified' , 'teacher']);
+Route::get('/course/{id}/chapters' , 'CourseController@chapters')->name('course.chapters')->middleware(['auth','verified' , 'teacher']);
 
 
 
@@ -42,6 +42,8 @@ Route::get('/lesson/{id}/complete','LessonController@complete')->name('lesson.co
 /**----------------------------------------------------------------------------------------------------------------**/
 
 Route::get('/chapter/{id}/quiz','QuizController@quiz')->name('chapter.quiz')->middleware(['auth','verified']);
+
+Route::get('/chapter/{id}/lessons','ChapterController@lessons')->name('chapter.lessons')->middleware(['auth','verified','teacher']);
 
 Route::post('/chapter/{id}/quiz','QuizController@quizSubmit')->name('chapter.quizSubmit')->middleware(['auth','verified']);
 
