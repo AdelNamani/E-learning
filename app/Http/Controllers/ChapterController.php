@@ -88,4 +88,12 @@ class ChapterController extends Controller
     {
         //
     }
+
+    public function lessons(Request $request)
+    {
+        $chapter = Chapter::findOrFail($request['id']);
+        $lessons = $chapter->lessons;
+        return view('chapter_lessons', ['lessons' => $lessons , 'chapter' => $chapter]);
+
+    }
 }

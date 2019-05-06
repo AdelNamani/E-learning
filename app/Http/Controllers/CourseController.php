@@ -125,11 +125,11 @@ class CourseController extends Controller
         return redirect(route('teacher.courses'));
     }
 
-    public function details(Request $request)
+    public function chapters(Request $request)
     {
         $course = Course::findOrFail($request['id']);
         if ($course->user_id != Auth::id()) abort(403);
         $chapters = $course->chapters;
-        return view('course_details', ['chapters' => $chapters]);
+        return view('course_chapters', ['chapters' => $chapters]);
     }
 }

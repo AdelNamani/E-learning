@@ -18,7 +18,7 @@
             <ul>
                 @foreach ($courses as $course)        
                 <li>
-                    {{-- <figure><img src="img/course_1.jpg" alt=""></figure> --}}
+                    <figure><img src="{{asset("storage/".$course->photo)}}" alt=""></figure>
                     <h4> {{$course->name }} 
                         {{-- <i class="pending">Pending</i> --}}
                     </h4>
@@ -31,7 +31,7 @@
                     <h6>Course description</h6> 
                 <p> {{ $course->description }}</p>
                     <ul class="buttons">
-                    <li><a href="{{route('course.details' , ['id' => $course->id ] )}}" class="btn_1 gray"><i class="fa fa-info-circle"></i> Details </a></li>
+                    <li><a href="{{route('course.chapters' , ['id' => $course->id ] )}}" class="btn_1 gray"><i class="fa fa-info-circle"></i> Chapters </a></li>
                     <li><a href="{{route('course.edit' , ['id' => $course->id ] )}}" class="btn_1 gray approve"><i class="fa fa-edit"></i> Edit</a></li>
                     <li>
                         <form method="POST" action="{{route('course.delete',['id'=>$course->id])}}" style="display: inline-block;">
