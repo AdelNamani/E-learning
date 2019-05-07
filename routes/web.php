@@ -39,6 +39,8 @@ Route::get('/lesson/{id}','LessonController@show')->name('lesson.show')->middlew
 
 Route::get('/lesson/{id}/complete','LessonController@complete')->name('lesson.complete')->middleware(['auth','verified']);
 
+Route::post('/lesson/add','LessonController@store')->name('lesson.store')->middleware(['auth','verified','teacher']);
+
 /**----------------------------------------------------------------------------------------------------------------**/
 
 Route::get('/chapter/{id}/quiz','QuizController@quiz')->name('chapter.quiz')->middleware(['auth','verified']);

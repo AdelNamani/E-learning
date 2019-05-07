@@ -36,7 +36,21 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|max:100',
+            'video' => ['required','regex:/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/'],
+            'chapter_id' => 'required|integer'
+        ]);
+
+        $lesson = new Lesson();
+        $lesson->name  = $request['name'];
+        $lesson->video = $request['video'];
+        $lesson->chapter_id = $request['chapter_id'];
+        $lesson->save();
+
+        $id = $lesson->id;
+        if($id) return json_encode($id);
+        else return response(403);
     }
 
     /**
