@@ -32,16 +32,33 @@ class QuizController extends Controller
     }
 
     public function propositionAdd(Request $request){
+        $request->validate([
+           'statement' => 'required|min:3|max:300',
+            'question_id' => 'required|integer',
+            'is_correct' => 'required|boolean'
+        ]);
+
         $proposition = new Proposition();
         $proposition->statement = $request['statement'];
         $proposition->question_id = $request['question_id'];
         $proposition->is_correct = $request['is_correct'];
         $proposition->save();
+
         $id = $proposition->id;
-        return response(json_encode($id));
+        if ($id != null) {
+            return response(json_encode($id));
+        }
+        else{
+            return response(403);
+        }
     }
 
     public function questionAdd(Request $request){
+        $request->validate([
+            'statement' => 'required|min:3|max:300',
+            'chapter_id' => 'required|integer',
+        ]);
+
         $question = new Question();
         $question->statement = $request['statement'];
         $question->chapter_id = $request['chapter_id'];

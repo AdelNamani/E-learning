@@ -15,6 +15,9 @@
                 <div class="form-group">
                     <label>Add question :</label>
                     <input class="form-control" type="text" v-model="new_question">
+                    <span class="text-danger small" role="alert">
+                        <strong v-text="question_error"></strong>
+                    </span>
                 </div>
                 <button v-on:click="add_question()" class="btn_1 medium">Add</button>
                 <br>
@@ -44,6 +47,9 @@
                     <div class="form-group">
                         <label> Add a proposition</label>
                         <input class="form-control" type="text" v-model="question.new_proposition">
+                        <span class="text-danger small" role="alert">
+                            <strong v-text="question.proposition_error"></strong>
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>
@@ -70,6 +76,7 @@
             el: "#quizCreator",
             data: {
                 new_question: '',
+                question_error : '',
                 questions: [
                         @foreach($chapter->questions as $question)
                     {
@@ -86,12 +93,14 @@
                         ],
                         new_proposition: '',
                         new_proposition_correct: false,
+                        proposition_error : ''
                     },
                     @endforeach
                 ]
             },
             methods: {
                 add_proposition: function (question_index) {
+                    app.questions[question_index].proposition_error = '';
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "POST",
@@ -104,6 +113,8 @@
                     }).done(function(data){
                         app.push_proposition(question_index,data);
                         app.questions[question_index].new_proposition = '';
+                    }).fail(function (data) {
+                        app.questions[question_index].proposition_error = data.responseJSON.errors.statement[0];
                     });
                 },
 
@@ -117,6 +128,7 @@
 
                 add_question: function () {
                     var id = null;
+                    this.question_error = '';
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "POST",
@@ -128,6 +140,8 @@
                     }).done(function (data) {
                         app.push_question(data);
                         app.new_question = '';
+                    }).fail(function (data) {
+                        app.question_error = data.responseJSON.errors.statement[0];
                     });
 
                 },
@@ -143,23 +157,14 @@
                 },
 
                 delete_proposition : function (question_index,proposition_index) {
-                    let con = true;
                     let id  = this.questions[question_index].propositions[proposition_index].id;
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "DELETE",
                         url: '/proposition/'+id,
-                        success: function (data) {
-                            console.log('success');
-                        },
-                        error: function (data) {
-                            console.log('error');
-                            con = false
-                        },
+                    }).done(function (data) {
+                        app.questions[question_index].propositions.splice(proposition_index,1);
                     });
-                    if (con){
-                        this.questions[question_index].propositions.splice(proposition_index,1);
-                    }
                 },
 
                 delete_question : function (question_index) {
@@ -169,17 +174,9 @@
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "DELETE",
                         url: '/question/'+id,
-                        success: function (data) {
-                            console.log('success');
-                        },
-                        error: function (data) {
-                            console.log('error');
-                            con = false
-                        },
+                    }).done(function (data) {
+                        app.questions.splice(question_index,1);
                     });
-                    if (con){
-                        this.questions.splice(question_index,1);
-                    }
                 }
             }
         });
