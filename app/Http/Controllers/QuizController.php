@@ -37,7 +37,8 @@ class QuizController extends Controller
         $proposition->question_id = $request['question_id'];
         $proposition->is_correct = $request['is_correct'];
         $proposition->save();
-        return response(200);
+        $id = $proposition->id;
+        return response(json_encode($id));
     }
 
     public function questionAdd(Request $request){

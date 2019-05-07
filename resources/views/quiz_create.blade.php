@@ -92,8 +92,6 @@
             },
             methods: {
                 add_proposition: function (question_index) {
-                    let con = true;
-                    console.log(question_index);
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "POST",
@@ -103,30 +101,22 @@
                             statement: this.questions[question_index].new_proposition,
                             is_correct: this.questions[question_index].new_proposition_correct ? 1 : 0
                         },
-                        success: function (date) {
-                            console.log('success');
-
-                        },
-                        error: function (data) {
-                            console.log('error');
-                            con = false
-                        }
-
+                    }).done(function(data){
+                        app.push_proposition(question_index,data);
+                        app.questions[question_index].new_proposition = '';
                     });
-                    if (con) {
-                        this.questions[question_index].propositions.push({
-                            statement: this.questions[question_index].new_proposition,
-                            is_correct: false
-                        });
-                    }
+                },
 
-                    this.questions[question_index].new_proposition = '';
-
+                push_proposition : function (question_index,id){
+                    this.questions[question_index].propositions.push({
+                        id : id,
+                        statement: this.questions[question_index].new_proposition,
+                        is_correct: false
+                    });
                 },
 
                 add_question: function () {
-                    let con = true;
-                    let id = null;
+                    var id = null;
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "POST",
@@ -135,30 +125,21 @@
                             chapter_id: {{$chapter->id}},
                             statement: this.new_question,
                         },
-                        success: function (data) {
-                            console.log('success');
-                            id = data.id;
-
-
-                        },
-                        error: function (data) {
-                            console.log('error');
-                            con = false
-                        }
-
+                    }).done(function (data) {
+                        app.push_question(data);
+                        app.new_question = '';
                     });
-                    if (con) {
-                        this.questions.push({
-                            id: id,
-                            statement: this.new_question,
-                            propositions: [],
-                            new_proposition: '',
-                            new_proposition_correct: false,
-                        });
-                    }
 
-                    this.new_question = '';
+                },
 
+                push_question : function(id){
+                    this.questions.push({
+                        id: id,
+                        statement: this.new_question,
+                        propositions: [],
+                        new_proposition: '',
+                        new_proposition_correct: false,
+                    });
                 },
 
                 delete_proposition : function (question_index,proposition_index) {
