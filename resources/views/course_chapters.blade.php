@@ -1,51 +1,72 @@
-
 @extends('layouts.admin')
 
 @section('content')
-<div class="box_general">
+    <div class="box_general">
         <div class="header_box">
-        <h2 class="d-inline-block">Course chapters </h2>
+            <h2 class="d-inline-block">Course chapters </h2>
         </div>
         <div class="list_general">
             <ul>
-                @foreach ($chapters as $chapter)        
-                <li>
-                    {{-- <figure><img src="img/course_1.jpg" alt=""></figure> --}}
-                    <h4> {{$chapter->name }} 
-                        {{-- <i class="pending">Pending</i> --}}
-                    </h4>
-                    <ul class="buttons">
-                    <li><a href="{{route('chapter.quizCreate' , ['id' => $chapter->id ] )}}" class="btn_1 gray"><i class="fa fa-info-circle"></i> Quiz </a></li>
-                    <li><a href="{{route('chapter.lessons' , ['id' => $chapter->id ] )}}" class="btn_1 gray"><i class="fa fa-info-circle"></i> Lessons </a></li>
-                        {{-- <li><a href="#0" class="btn_1 gray delete"><i class="fa fa-fw fa-times-circle-o"></i> Cancel</a></li> --}}
-                    </ul>
-                </li>
+                @foreach ($course->chapters as $chapter)
+                    <li>
+                        {{-- <figure><img src="img/course_1.jpg" alt=""></figure> --}}
+                        <h4> {{$chapter->name }}
+                            {{-- <i class="pending">Pending</i> --}}
+                        </h4>
+                        <ul class="buttons">
+                            <li><a href="{{route('chapter.quizCreate' , ['id' => $chapter->id ] )}}" class="btn_1 gray"><i
+                                            class="fa fa-info-circle"></i> Quiz </a></li>
+                            <li><a href="{{route('chapter.lessons' , ['id' => $chapter->id ] )}}" class="btn_1 gray"><i
+                                            class="fa fa-info-circle"></i> Lessons </a></li>
+                            <li>
+                                <form method="POST" action="{{route('chapter.delete',['id'=>$chapter->id])}}"
+                                      style="display: inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="display : inline ;"><i class=" indicator fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            {{-- <li><a href="#0" class="btn_1 gray delete"><i class="fa fa-fw fa-times-circle-o"></i> Cancel</a></li> --}}
+                        </ul>
+                    </li>
                 @endforeach
             </ul>
         </div>
-</div>
-<form action="" method="post">
-    <div class="box_general">
-            <div class="header_box">
-                    <h2 class="d-inline-block">Add new chapter </h2>
-            </div>
-                    <div class="list_general">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                                <div class="form-group">
-                                                        <input class="form-control" type="text" name="" id="" placeholder="chapter name">
-                                                </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                                <div class="form-group">
-                                                        <input type="file" name="" id="" >
-                                                </div>
-                                        </div>
-                                    </div>
-                    </div>
     </div>
-    <button  class="btn_1 medium"><i class="fa fa-fw fa-plus-circle"></i>Add Chapter</button>
-</form>
+    <form enctype="multipart/form-data" action="{{route('chapter.store',['id'=>$course->id])}}" method="post">
+        @csrf
+        <div class="box_general">
+            <div class="header_box">
+                <h2 class="d-inline-block">Add new chapter </h2>
+            </div>
+            <div class="list_general">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="name" id="" placeholder="chapter name">
+                            @error('name')
+                            <span class="text-danger small" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input type="file" name="support" id="">
+                            @error('support')
+                            <span class="text-danger small" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn_1 medium"><i class="fa fa-fw fa-plus-circle"></i>Add Chapter</button>
+    </form>
 
     <!-- /box_general-->
     {{-- <nav aria-label="...">

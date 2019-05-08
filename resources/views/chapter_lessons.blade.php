@@ -3,7 +3,7 @@
 @section('content')
     <div class="box_general padding_bottom">
         <div class="header_box version_2">
-            <h2><i class="fa fa-file"></i>Chapter lessons</h2>
+            <h2><i class="fa fa-file"></i>{{$chapter->name}} lessons</h2>
         </div>
         <div id="app" class="row">
             <div class="col-md-12">
@@ -11,16 +11,20 @@
                     <tr class="pricing-list-item">
                         <td>
 
-                            <div v-for="lesson in lessons" class="row">
+                            <div v-for="(lesson,index) in lessons" class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <p v-text="lesson.name"></p>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <div class="form-group">
                                         <a target="_blank" v-bind:href="lesson.video" v-text="lesson.video"></a>
                                     </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <a v-on:click="delete_lesson(index)" style="display : inline ;" ><i
+                                                class=" indicator fa fa-trash"></i></a>
                                 </div>
                             </div>
 
@@ -34,7 +38,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <div class="form-group">
                                         <input v-model="new_lesson_video" type="text" class="form-control"
                                                placeholder="Video URL">
@@ -53,7 +57,7 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn_1 medium">Save</button>
+    <a href="{{route('course.chapters',['id'=>$chapter->course->id])}}" class="btn_1 medium">Go back to chapter</a>
 @endsection
 
 @section('js')
@@ -109,6 +113,22 @@
                         chapter_id: {{$chapter->id}}
                     })
                 },
+
+                delete_lesson : function(index){
+                    let id = this.lessons[index].id;
+                    $.ajax({
+                        headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+                        type : 'POST',
+                        url : '{{route('lesson.destroy')}}',
+                        data : {
+                            id : id,
+                        }
+                    }).done(function (data) {
+                        app.lessons.splice(index,1);
+                    }).fail(function (data) {
+                        console.log('error');
+                    })
+                }
             }
         })
     </script>

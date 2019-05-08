@@ -94,9 +94,13 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Lesson $lesson)
+    public function destroy(Request $request)
     {
-        //
+        if ($request['id']==null) return response(403);
+        else{
+            Lesson::destroy($request['id']);
+            return response(200);
+        }
     }
 
     public function complete(Request $request){

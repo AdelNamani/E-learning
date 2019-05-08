@@ -104,7 +104,6 @@ class CourseController extends Controller
             $path = $request->file('photo')->storeAs('public/uploads/course', $name);
             $paths = explode('/', $path);
             $correct_path = $paths[1] . '/' . $paths[2] . '/' . $name;
-            //dd($path,$paths,$correct_path);
             $course->photo = $correct_path;
         }
         $course->save();
@@ -129,7 +128,6 @@ class CourseController extends Controller
     {
         $course = Course::findOrFail($request['id']);
         if ($course->user_id != Auth::id()) abort(403);
-        $chapters = $course->chapters;
-        return view('course_chapters', ['chapters' => $chapters]);
+        return view('course_chapters', ['course' => $course]);
     }
 }

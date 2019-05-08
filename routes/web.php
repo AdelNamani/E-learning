@@ -29,11 +29,17 @@ Route::patch('/course/{id}' , 'CourseController@update')->name('course.update')-
 
 Route::delete('/course/{id}' , 'CourseController@destroy')->name('course.delete')->middleware(['auth','verified' , 'teacher']);
 
+/**----------------------------------------------------------------------------------------------------------------**/
+
 Route::get('/course/{id}/chapters' , 'CourseController@chapters')->name('course.chapters')->middleware(['auth','verified' , 'teacher']);
 
+Route::post('/course/{id}/chapter/add','ChapterController@store')->name('chapter.store')->middleware(['auth','verified' , 'teacher']);
+
+Route::delete('/chapter/{id}' , 'ChapterController@destroy')->name('chapter.delete')->middleware(['auth','verified' , 'teacher']);
 
 
 /**----------------------------------------------------------------------------------------------------------------**/
+Route::get('/chapter/{id}/lessons','ChapterController@lessons')->name('chapter.lessons')->middleware(['auth','verified','teacher']);
 
 Route::get('/lesson/{id}','LessonController@show')->name('lesson.show')->middleware(['auth','verified']);
 
@@ -41,11 +47,11 @@ Route::get('/lesson/{id}/complete','LessonController@complete')->name('lesson.co
 
 Route::post('/lesson/add','LessonController@store')->name('lesson.store')->middleware(['auth','verified','teacher']);
 
+Route::post('/lesson/destroy','LessonController@destroy')->name('lesson.destroy')->middleware(['auth','verified','teacher']);
+
 /**----------------------------------------------------------------------------------------------------------------**/
 
 Route::get('/chapter/{id}/quiz','QuizController@quiz')->name('chapter.quiz')->middleware(['auth','verified']);
-
-Route::get('/chapter/{id}/lessons','ChapterController@lessons')->name('chapter.lessons')->middleware(['auth','verified','teacher']);
 
 Route::post('/chapter/{id}/quiz','QuizController@quizSubmit')->name('chapter.quizSubmit')->middleware(['auth','verified']);
 
