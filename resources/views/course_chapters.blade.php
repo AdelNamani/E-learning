@@ -15,9 +15,9 @@
                         </h4>
                         <ul class="buttons">
                             <li><a href="{{route('chapter.quizCreate' , ['id' => $chapter->id ] )}}" class="btn_1 gray"><i
-                                            class="fa fa-info-circle"></i> Quiz </a></li>
+                                            class="fa fa-question-circle"></i> Quiz </a></li>
                             <li><a href="{{route('chapter.lessons' , ['id' => $chapter->id ] )}}" class="btn_1 gray"><i
-                                            class="fa fa-info-circle"></i> Lessons </a></li>
+                                            class="fa fa-play"></i> Lessons </a></li>
                             <li>
                                 <form method="POST" action="{{route('chapter.delete',['id'=>$chapter->id])}}"
                                       style="display: inline-block;">

@@ -30,7 +30,7 @@
         <div class="row">
             <aside class="col-lg-3" id="sidebar">
                 <div class="profile">
-                    <figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_2_small.jpg" alt="Teacher"
+                    <figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_2_small.jpg"
                             class="rounded-circle"></figure>
                     {{-- <ul class="social_teacher">
 							<li><a href="#"><i class="icon-facebook"></i></a></li>

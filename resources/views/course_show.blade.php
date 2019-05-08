@@ -8,8 +8,8 @@
 <input type="hidden" id="checkLesson" name="Var2" value="salam" />
 
 <main>
-		<section id="hero_in" class="courses">
-			<div class="wrapper" style="background : url({{asset("storage/".$course->photo)}}) center center no-repeat;">
+		<section id="hero_in" class="courses"  style="background : url({{asset("storage/".$course->photo)}}) center center no-repeat;">
+			<div class="wrapper" style="background-color:rgba(0, 0, 0, 0.7);">
 				<div class="container">
 					<h1 class="fadeInUp"><span></span> {{$course->name}}</h1>
 				</div>
@@ -87,7 +87,8 @@
 															<a href="{{$lesson->video}}" data-var1="{{$lesson->id}}" data-var2="{{$lesson->users->contains(Auth::user())}}" class="video video-click"> {{$lesson->name}} </a></li>
 																{{-- <a href="https://www.youtube.com/watch?v=eEKfWVvADiQ" class="video"> {{$lesson->name}} </a></li> --}}
                                                         @endforeach
-                                                        <li><a href="{{$chapter->support}}" class="txt_doc">Chapter support</a></li>
+                                                        <li><a href="{{asset("storage/".$chapter->support)}}" class="txt_doc">Chapter support</a></li>
+                                                        <li><a href="{{route('chapter.quiz' , ['id' => $chapter->id ]) }}"> <i class="icon-help"></i> Quiz </a></li>
 
                                                     </ul>
                                                 </div>

@@ -29,18 +29,22 @@
                                 <a style="display : inline ;" data-toggle="collapse" :href=" '#'+ question.id"
                                    aria-expanded="true"><i class="indicator fa fa-caret-down"></i>
                                     @{{question.statement}}</a>
-                                <a v-on:click="delete_question(index)" style="display : inline ;" ><i class=" indicator fa fa-trash"></i></a>
+                                <a v-on:click="delete_question(index)" class="hover" style="display : inline ;" ><i class=" indicator fa fa-trash"></i></a>
                             </h5>
                         </div>
 
                         <div :id="question.id" class="collapse show" role="tabpanel" data-parent="#payment">
                             <div class="card-body">
-                                <p v-for="(proposition,indexP) in question.propositions">
-                                    @{{proposition.statement}}
-                                    <a v-on:click="delete_proposition(index,indexP)" style="display : inline ;" ><i
-                                                class=" indicator fa fa-trash"></i></a>
-                                </p>
-
+                                    <div class="row"  v-for="(proposition,indexP) in question.propositions">
+                                        <div class="col-lg-11">
+                                                @{{proposition.statement}}
+                                        </div>
+                                        <div class="col-lg-1">
+                                                <a v-on:click="delete_proposition(index,indexP)"class="btn_1 gray delete" style="display : inline ;" ><i
+                                                    class=" indicator fa fa-trash"></i></a>
+                                        </div>
+                                        <hr>
+                                    </div>
                             </div>
                         </div>
                     </div>

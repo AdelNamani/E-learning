@@ -73,7 +73,7 @@ Author URI: http://themeforest.net/user/Ansonika/
   -moz-animation: circle infinite .95s linear;
   -o-animation: circle infinite .95s linear;
   animation: circle infinite .95s linear;
-  border: 2px solid #662d91;
+  border: 2px solid #3f9fff;
   border-top-color: rgba(0, 0, 0, 0.2);
   border-right-color: rgba(0, 0, 0, 0.2);
   border-bottom-color: rgba(0, 0, 0, 0.2);
@@ -243,7 +243,7 @@ ul, ol {
 .main_title_2 span em {
   width: 60px;
   height: 2px;
-  background-color: #662d91;
+  background-color: #3f9fff;
   display: block;
   margin: auto;
 }
@@ -1099,7 +1099,7 @@ video {
 
 @media (max-width: 1024px) {
   #hero_video {
-    background: #662d91 url(http://via.placeholder.com/1600x1067/ccc/fff/bg_home_fallback_video.jpg);
+    background: #3f9fff url(http://via.placeholder.com/1600x1067/ccc/fff/bg_home_fallback_video.jpg);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -1895,8 +1895,8 @@ a.box_feat h3 {
   z-index: 9;
 }
 #carousel .item .title h4 {
-  background-color: #662d91;
-  background-color: #662d91;
+  background-color: #3f9fff;
+  background-color: #3f9fff;
   display: inline-block;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -2182,8 +2182,8 @@ a.box_feat h3 {
 }
 .box_grid ul li:last-child a {
   background: #fff;
-  border: 2px solid #662d91;
-  color: #662d91;
+  border: 2px solid #3f9fff;
+  color: #3f9fff;
   padding: 5px 20px;
   font-weight: 500;
   line-height: 1;
@@ -2198,7 +2198,7 @@ a.box_feat h3 {
   border-radius: 30px;
 }
 .box_grid ul li:last-child a:hover {
-  background: #662d91;
+  background: #3f9fff;
   color: #fff;
 }
 
@@ -2343,7 +2343,7 @@ a.box_feat h3 {
   font-weight: 600;
   font-size: 24px;
   font-size: 1.5rem;
-  color: #662d91;
+  color: #3f9fff;
 }
 .box_list .wrapper h3 {
   font-size: 20px;
@@ -2370,8 +2370,8 @@ a.box_feat h3 {
 }
 .box_list ul li:last-child a {
   background: #fff;
-  border: 2px solid #662d91;
-  color: #662d91;
+  border: 2px solid #3f9fff;
+  color: #3f9fff;
   padding: 5px 20px;
   font-weight: 500;
   line-height: 1;
@@ -2386,7 +2386,7 @@ a.box_feat h3 {
   border-radius: 30px;
 }
 .box_list ul li:last-child a:hover {
-  background: #662d91;
+  background: #3f9fff;
   color: #fff;
 }
 
@@ -2435,7 +2435,7 @@ a.box_feat h3 {
   color: #ccc;
 }
 .layout_view a.active {
-  color: #662d91 !important;
+  color: #3f9fff !important;
 }
 .layout_view a:hover {
   color: #392779;
@@ -2453,7 +2453,7 @@ a.box_feat h3 {
   overflow: hidden;
 }
 .switch-field input:checked + label {
-  background-color: #662d91;
+  background-color: #3f9fff;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -2464,7 +2464,7 @@ a.box_feat h3 {
   display: inline-block;
   min-width: 70px;
   background-color: #fff;
-  color: #662d91;
+  color: #3f9fff;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 12px;
@@ -2529,7 +2529,7 @@ a.box_feat h3 {
   color: #555;
   outline: none;
   text-decoration: none;
-  color: #662d91;
+  color: #3f9fff;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 12px;
@@ -2552,7 +2552,7 @@ a.box_feat h3 {
   font-size: 14px;
   font-size: 0.875rem;
   content: "\43";
-  color: #662d91;
+  color: #3f9fff;
   text-align: center;
 }
 
@@ -4207,7 +4207,7 @@ ul.social_teacher li {
   font-size: 3.125rem;
   position: absolute;
   left: 0;
-  color: #662d91;
+  color: #3f9fff;
   top: -3px;
 }
 @media (max-width: 767px) {
@@ -4302,7 +4302,7 @@ ul.list_3 li:before {
 }
 
 .fc-event {
-  background-color: #662d91 !important;
+  background-color: #3f9fff !important;
 }
 
 @media (max-width: 767px) {
@@ -4876,14 +4876,14 @@ ul.bullets li:before {
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
-  background: #662d91;
+  background: #3f9fff;
 }
 .animated .block-vertical {
   animation: reveal_top_to_bottom 1s ease-in-out;
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
-  background: #662d91;
+  background: #3f9fff;
 }
 
 .block-reveal img {
