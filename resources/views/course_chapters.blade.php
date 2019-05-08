@@ -23,7 +23,7 @@
                                       style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" style="display : inline ;"><i class=" indicator fa fa-trash"></i>
+                                    <button class="btn_1 gray delete" type="submit" style="display : inline ;"><i class=" indicator fa fa-trash"></i> Delete
                                     </button>
                                 </form>
                             </li>

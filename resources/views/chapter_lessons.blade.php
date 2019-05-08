@@ -7,12 +7,8 @@
         </div>
         <div id="app" class="row">
             <div class="col-md-12">
-                <table id="pricing-list-container" style="width:100%;">
-                    <tr class="pricing-list-item">
-                        <td>
-
                             <div v-for="(lesson,index) in lessons" class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <p v-text="lesson.name"></p>
                                     </div>
@@ -22,9 +18,9 @@
                                         <a target="_blank" v-bind:href="lesson.video" v-text="lesson.video"></a>
                                     </div>
                                 </div>
-                                <div class="col-md-1">
-                                    <a v-on:click="delete_lesson(index)" style="display : inline ;" ><i
-                                                class=" indicator fa fa-trash"></i></a>
+                                <div class="col-md-2">
+                                                <a v-on:click="delete_lesson(index)" class="btn_1 gray delete" style="display : inline ;" ><i
+                                                    class=" indicator fa fa-trash"></i> Delete </a>
                                 </div>
                             </div>
 
@@ -48,10 +44,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </td>
-                    </tr>
-                </table>
                 <a v-on:click="add_lesson()" class="btn_1 gray add-pricing-list-item"><i
                             class="fa fa-fw fa-plus-circle"></i>Add Lesson</a>
             </div>
@@ -100,8 +92,8 @@
                         app.new_lesson_name = '';
                         app.new_lesson_video = '';
                     }).fail(function (data) {
-                        app.name_error = data.responseJSON.errors.name[0];
-                        app.video_error = data.responseJSON.errors.video[0];
+                        app.name_error = data.responseJSON.errors.name ? data.responseJSON.errors.name[0] : null ;
+                        app.video_error = data.responseJSON.errors.video ? data.responseJSON.errors.video[0] : null ;
                     })
                 },
 
