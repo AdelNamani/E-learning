@@ -10,8 +10,8 @@
 @include('partials.header')
 
 <main>
-		<section id="hero_in" class="general">
-			<div class="wrapper">
+		<section id="hero_in" class="general"  style="background : url({{asset("storage/".$chapter->course->photo)}}) center center no-repeat;">
+			<div class="wrapper" style="background-color:rgba(0, 0, 0, 0.7);">
 				<div class="container">
                     <h1 class="fadeInUp"><span></span>Quiz - {{$chapter->name}}</h1>
                     <a href="#" id="quiz-start-btn" class="btn_1 rounded">Start Quiz</a>
