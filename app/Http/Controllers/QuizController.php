@@ -13,7 +13,15 @@ class QuizController extends Controller
     public function quiz(Request $request){
 
         $chapter = Chapter::findOrFail($request['id']);
-        return view('quiz',['chapter' => $chapter ]);
+        $completed = true;
+        foreach ($chapter->lessons as $lesson){
+            if (!Auth::user()->lessons->contains($lesson)){
+                $completed = false;
+                break;
+            }
+        }
+
+        return view('quiz',['chapter' => $chapter , 'completed'=>$completed ]);
 
     }
 
