@@ -97,6 +97,7 @@ class CourseController extends Controller
     public function update(Request $request)
     {
         $course = Course::findOrFail($request['id']);
+        if ($course->user_id != Auth::id()) abort(404);
         $course->name = $request['name'];
         $course->description = $request['description'];
         if ($request->hasFile('photo')) {
@@ -108,6 +109,14 @@ class CourseController extends Controller
         }
         $course->save();
         return redirect(route('course.show', ['id' => $course->id]));
+    }
+
+    public function updateState(Request $request){
+        $course = Course::findOrFail($request['id']);
+        if ($course->user_id != Auth::id()) abort(404);
+        $course->state = $request['state'];
+        $course->save();
+        return redirect(route('teacher.courses'));
     }
 
     /**

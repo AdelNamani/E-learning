@@ -19,6 +19,7 @@ class CreateCoursesTable extends Migration
             $table->text('description');
             $table->string('photo')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->enum('state',['in creation','waiting for approval','approved','rejected']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();            
         });
