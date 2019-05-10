@@ -31,6 +31,8 @@ Route::delete('/course/{id}' , 'CourseController@destroy')->name('course.delete'
 
 Route::patch('/course/{id}/state' , 'CourseController@updateState')->name('course.updateState')->middleware(['auth','verified' , 'teacher']);
 
+Route::post('/course/search','CourseController@search')->name('course.search');
+
 /**----------------------------------------------------------------------------------------------------------------**/
 
 Route::get('/course/{id}/chapters' , 'CourseController@chapters')->name('course.chapters')->middleware(['auth','verified' , 'teacher']);
