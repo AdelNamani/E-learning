@@ -11,39 +11,43 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <table id="Users" class=" table table-striped table-bordered" width="100%">
+            <table id="Courses" class=" table table-striped table-bordered" width="100%">
                 <thead class="thead-light">
                 <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col"> is Admin </th>
-                    <th scope="col"> is Teacher </th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col"> Author </th>
+                    <th scope="col">  State </th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $user)
-                    <tr id="{{$user->id}}">
-                        <td>{{$user->first_name }}</td>
-                        <td>{{$user->last_name }}</td>
-                        <td>{{$user->email }}</td>
-
-                        <td>
-                            <div class="form-check">
-                                <input type="checkbox" @if ($user->is_admin)
-                                    checked                                    
-                                @endif class="form-check-input" onclick="check({{$user->id}} , 'admin' , this)">
-                            </div>
-                        </td>
-                        <td>
-                                <div class="form-check">
-                                        <input type="checkbox" @if ($user->is_teacher )
-                                            checked                                    
-                                        @endif class="form-check-input" onclick="check({{$user->id}} ,'teacher' , this)">
+                @foreach($courses as $course)
+                    <tr id="{{$course->id}}">
+                        <td>{{$course->name }}</td>
+                        <td>{{$course->description }}</td>
+                        <td>{{$course->user->first_name . ' ' . $course->user->last_name }}</td>
+                        {{-- <td>{{$course->state }}</td> --}}
+                        <td class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Change state 
+                                </button>
+                                <div class="dropdown-menu">
+                                        <a class="dropdown-item @if ($course->state == 'waiting for approval')
+                                            active
+                                        @endif" href="#"> Waiting</a>
+                                        <a class="dropdown-item @if ($course->state == 'approved')
+                                                active
+                                            @endif" href="#"> Approved</a>
+                                        <a class="dropdown-item @if ($course->state == 'in creation')
+                                                active
+                                            @endif" href="#"> In creation</a>
+                                        <a class="dropdown-item @if ($course->state == 'rejected')
+                                                active
+                                            @endif" href="#"> Rejected</a>
                                 </div>
-                        </td>
-
+                            </td>
                     </tr>
+
                 @endforeach
                 </tbody>
                 <tfoot></tfoot>
@@ -58,36 +62,11 @@
  <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js "></script>
  <script>
- $('#Users').DataTable(
+ $('#Courses').DataTable(
     {
         responsive: true,
     }
 )
 </script>
 
-<script>
-const token = '{{csrf_token()}}';
-const route = "{{route('admin.check')}}" ;
-var set ;
-function check(id , type , element) {
-            element.checked ? set = 1 : set = 0 ;
-            $.ajax({
-                headers: {'X-CSRF-TOKEN': token},
-                type: "POST",
-                url: route,
-                dataType: 'json',
-                data: JSON.stringify({id : id,type : type ,set : set  }),
-                beforeSend: function () {
-                    $(document.body).css({'cursor': 'wait'});
-                },
-                success: function () {
-                    $(document.body).css({'cursor': 'default'});
-                },
-                error: function () {
-                    alert("Something went wrong!");
-                    $(document.body).css({'cursor': 'default'});
-                }
-            })
-        }
-</script>
 @endsection
