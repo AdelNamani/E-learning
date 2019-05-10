@@ -17,7 +17,6 @@
   <!-- Icon fonts-->
 <link href="{{asset('admin/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
   <!-- Plugin styles -->
-  {{-- <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"> --}}
   <!-- Your custom styles -->
 <link href="{{asset('admin/css/custom.css')}}" rel="stylesheet">
 </head>
@@ -31,19 +30,35 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="{{route('teacher.courses')}}">
-              <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">My Courses</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="{{route('course.create')}}">
-              <i class="fa fa-plus"></i>
-              <span class="nav-link-text">Add Course</span>
-          </a>
-        </li>
-      </ul>
+          @if (Auth::user()->is_teacher)
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="{{route('teacher.courses')}}">
+                <i class="fa fa-fw fa-dashboard"></i>
+                <span class="nav-link-text">My Courses</span>
+            </a>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="{{route('course.create')}}">
+                <i class="fa fa-plus"></i>
+                <span class="nav-link-text">Add Course</span>
+            </a>
+          </li>
+          @endif
+          @if (Auth::user()->is_admin)  
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="{{route('admin.courses')}}">
+                <i class="fa fa-fw fa-dashboard"></i>
+                <span class="nav-link-text">All Courses</span>
+            </a>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="{{route('admin.users')}}">
+                <i class="fa fa-user"></i>
+                <span class="nav-link-text"> Users </span>
+            </a>
+          </li>
+      @endif
+        </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
           <a class="nav-link text-center" id="sidenavToggler">
@@ -89,9 +104,9 @@
     <!-- Core plugin JavaScript-->
     <script src="{{asset('admin/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
     <!-- Page level plugin JavaScript-->
-    <script src="{{asset('admin/vendor/chart.js/Chart.js')}}"></script> 
+    {{-- <script src="{{asset('admin/vendor/chart.js/Chart.js')}}"></script> 
     <script src="{{asset('admin/vendor/datatables/jquery.dataTables.js')}}"></script>
-    <script src="{{asset('admin/vendor/datatables/dataTables.bootstrap4.js')}}"></script>
+    <script src="{{asset('admin/vendor/datatables/dataTables.bootstrap4.js')}}"></script> --}}
 <script src="{{asset('admin/vendor/jquery.selectbox-0.2.js')}}"></script>
 <script src="{{asset('admin/vendor/retina-replace.min.js')}}"></script>
 <script src="{{asset('admin/vendor/jquery.magnific-popup.min.js')}}"></script>

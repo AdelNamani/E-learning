@@ -37,7 +37,7 @@
                                         @csrf
                                         {{ method_field('patch') }}
                                         <input type="text" name="state" hidden value="waiting for approval">
-                                        <button type="submit" class="btn_1 gray"><i class="fa fa-info-circle"></i>
+                                        <button type="submit" class="btn_1 gray">
                                             Submit for review
                                         </button>
                                     </form>
@@ -50,7 +50,7 @@
                                         @csrf
                                         {{ method_field('patch') }}
                                         <input type="text" name="state" hidden value="in creation">
-                                        <button type="submit" class="btn_1 gray"><i class="fa fa-info-circle"></i>
+                                        <button type="submit" class="btn_1 gray">
                                             Cancel submission
                                         </button>
                                     </form>
@@ -63,7 +63,7 @@
                                         @csrf
                                         {{ method_field('patch') }}
                                         <input type="text" name="state" hidden value="in creation">
-                                        <button type="submit" class="btn_1 gray"><i class="fa fa-info-circle"></i>
+                                        <button type="submit" class="btn_1 gray">
                                             Go back to creation
                                         </button>
                                     </form>
@@ -76,7 +76,7 @@
                                         @csrf
                                         {{ method_field('patch') }}
                                         <input type="text" name="state" hidden value="waiting for approval">
-                                        <button type="submit" class="btn_1 gray"><i class="fa fa-info-circle"></i>
+                                        <button type="submit" class="btn_1 gray">
                                             Submit again
                                         </button>
                                     </form>

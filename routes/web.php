@@ -80,5 +80,13 @@ Route::post('/profile/update_password','UserController@update_password')->name('
 /**----------------------------------------------------------------------------------------------------------------**/
 
 Route::get('/teacher' , 'TeacherController@index')->name('teacher.courses')->middleware(['auth' , 'verified' ,'teacher']) ; 
+/**----------------------------------------------------------------------------------------------------------------**/
 
+Route::get('/admin', 'AdminController@index')->name('admin.home')->middleware(['auth' , 'verified', 'admin']);
+
+Route::get('/admin/users', 'AdminController@users')->name('admin.users')->middleware(['auth' , 'verified', 'admin']);
+
+Route::get('/admin/courses', 'AdminController@courses')->name('admin.courses')->middleware(['auth' , 'verified', 'admin']);
+
+Route::post('/admin/check', 'AdminController@check')->name('admin.check')->middleware(['auth' , 'verified', 'admin']);
 
