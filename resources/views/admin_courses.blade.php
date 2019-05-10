@@ -71,7 +71,7 @@
  function change_state(id,new_state) {
      $.ajax({
          headers: {'X-CSRF-TOKEN': '{{csrf_token()}}'},
-         url : '{{route('admin.updateState')}}',
+         url : "{{route('admin.updateState')}}",
          type : 'POST',
          dataType: 'json',
          data : JSON.stringify({
