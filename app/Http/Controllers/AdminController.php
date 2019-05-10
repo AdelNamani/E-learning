@@ -54,4 +54,11 @@ class AdminController extends Controller
         }
             return response(404);
     }
+
+    public function updateState(Request $request){
+        $course = Course::findOrFail(json_decode($request->getContent())->id);
+        $course->state = json_decode($request->getContent())->state;
+        $course->save;
+        return response(200);
+    }
 }

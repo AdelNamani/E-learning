@@ -29,21 +29,21 @@
                         {{-- <td>{{$course->state }}</td> --}}
                         <td class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Change state 
+                                  Change state
                                 </button>
                                 <div class="dropdown-menu">
-                                        <a class="dropdown-item @if ($course->state == 'waiting for approval')
+                                        <button class="dropdown-item @if ($course->state == 'waiting for approval')
                                             active
-                                        @endif" href="#"> Waiting</a>
-                                        <a class="dropdown-item @if ($course->state == 'approved')
+                                        @endif" onclick="change_state({{$course->id}},'waiting for approval')"> Waiting</button>
+                                        <button class="dropdown-item @if ($course->state == 'approved')
                                                 active
-                                            @endif" href="#"> Approved</a>
-                                        <a class="dropdown-item @if ($course->state == 'in creation')
+                                            @endif" onclick="change_state({{$course->id}},'approved')"> Approved</button>
+                                        <button class="dropdown-item @if ($course->state == 'in creation')
                                                 active
-                                            @endif" href="#"> In creation</a>
-                                        <a class="dropdown-item @if ($course->state == 'rejected')
+                                            @endif" onclick="change_state({{$course->id}},'in creation')"> In creation</button>
+                                        <button class="dropdown-item @if ($course->state == 'rejected')
                                                 active
-                                            @endif" href="#"> Rejected</a>
+                                            @endif" onclick="change_state({{$course->id}},'rejected')"> Rejected</button>
                                 </div>
                             </td>
                     </tr>
@@ -66,7 +66,32 @@
     {
         responsive: true,
     }
-)
+);
+
+ function change_state(id,new_state) {
+     $.ajax({
+         headers: {'X-CSRF-TOKEN': '{{csrf_token()}}'},
+         url : '{{route('admin.updateState')}}',
+         type : 'POST',
+         dataType: 'json',
+         data : JSON.stringify({
+             id  : id,
+             state : new_state
+         }),
+         beforeSend: function () {
+             $(document.body).css({'cursor': 'wait'});
+         },
+         success: function () {
+             alert('why');
+             $(document.body).css({'cursor': 'default'});
+         },
+         error: function () {
+             alert("Something went wrong!");
+             $(document.body).css({'cursor': 'default'});
+         }
+
+     })
+ }
 </script>
 
 @endsection
