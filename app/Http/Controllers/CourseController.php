@@ -18,7 +18,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::take(5)->get();
         foreach ($courses as $course) {
             $course->teacher = $course->user->first_name . ' ' . $course->user->last_name;
         }
@@ -138,5 +138,10 @@ class CourseController extends Controller
         $course = Course::findOrFail($request['id']);
         if ($course->user_id != Auth::id()) abort(403);
         return view('course_chapters', ['course' => $course]);
+    }
+
+    public function search(Request $request){
+        $courses=Course::where('name','like',"%{$request->input('q')}%")->select('name','id')->get()->take('5');
+        return json_encode($courses);
     }
 }
