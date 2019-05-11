@@ -36,7 +36,7 @@
                         <div :id="question.id" class="collapse show" role="tabpanel" data-parent="#payment">
                             <div class="card-body">
                                     <div class="row"  v-for="(proposition,indexP) in question.propositions">
-                                        <div class="col-lg-11" v-bind:class= "{ green : proposition.is_correct , red : !proposition.is_correct} ">
+                                        <div class="col-lg-11" v-bind:class= "[proposition.is_correct==1 ? 'green' : 'red'] ">
                                                 @{{proposition.statement}}
                                         </div>
                                         <div class="col-lg-1">
