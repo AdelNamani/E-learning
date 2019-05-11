@@ -32,18 +32,18 @@
                                   Change state
                                 </button>
                                 <div class="dropdown-menu">
-                                        <button class="dropdown-item @if ($course->state == 'waiting for approval')
+                                        <button class="dropdown-item {{ 'selected' . $course->id }} @if ($course->state == 'waiting for approval')
                                             active
-                                        @endif" onclick="change_state({{$course->id}},'waiting for approval')"> Waiting</button>
-                                        <button class="dropdown-item @if ($course->state == 'approved')
+                                        @endif" onclick="change_state({{$course->id}},'waiting for approval' , this)"> Waiting</button>
+                                        <button class="dropdown-item {{ 'selected' . $course->id }} @if ($course->state == 'approved')
                                                 active
-                                            @endif" onclick="change_state({{$course->id}},'approved')"> Approved</button>
-                                        <button class="dropdown-item @if ($course->state == 'in creation')
+                                            @endif" onclick="change_state({{$course->id}},'approved' , this)"> Approved</button>
+                                        <button class="dropdown-item {{ 'selected' . $course->id }} @if ($course->state == 'in creation')
                                                 active
-                                            @endif" onclick="change_state({{$course->id}},'in creation')"> In creation</button>
-                                        <button class="dropdown-item @if ($course->state == 'rejected')
+                                            @endif" onclick="change_state({{$course->id}},'in creation' , this)"> In creation</button>
+                                        <button class="dropdown-item {{ 'selected' . $course->id }} @if ($course->state == 'rejected')
                                                 active
-                                            @endif" onclick="change_state({{$course->id}},'rejected')"> Rejected</button>
+                                            @endif" onclick="change_state({{$course->id}},'rejected' , this)"> Rejected</button>
                                 </div>
                             </td>
                     </tr>
@@ -68,7 +68,7 @@
     }
 );
 
- function change_state(id,new_state) {
+ function change_state(id,new_state , element) {
      $.ajax({
          headers: {'X-CSRF-TOKEN': '{{csrf_token()}}'},
          url : "{{route('admin.updateState')}}",
@@ -82,8 +82,12 @@
              $(document.body).css({'cursor': 'wait'});
          },
          success: function () {
-             alert('why');
              $(document.body).css({'cursor': 'default'});
+             var items = document.querySelectorAll('.selected' + id) ;
+             items.forEach(item => {
+                 item.classList.remove('active') ;
+             });
+             element.classList.add('active');
          },
          error: function () {
              alert("Something went wrong!");
