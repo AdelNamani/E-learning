@@ -18,8 +18,8 @@
     @include('partials.header')
 
 <main>
-    <section id="hero_in" class="general">
-        <div class="wrapper">
+    <section id="hero_in" class="general" style="background : url({{asset('img/bg_general.jpg')}}) center center no-repeat;" >
+        <div class="wrapper" style="background-color:rgba(0, 0, 0, 0.7);">
             <div class="container">
                 <h1 class="fadeInUp"><span></span>Profile detail</h1>
             </div>
@@ -30,8 +30,9 @@
         <div class="row">
             <aside class="col-lg-3" id="sidebar">
                 <div class="profile">
-                    <figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_2_small.jpg"
-                            class="rounded-circle"></figure>
+                    {{-- <figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_2_small.jpg"
+                            class="rounded-circle"></figure> --}}
+                            <h4> Settings </h4>
                     {{-- <ul class="social_teacher">
 							<li><a href="#"><i class="icon-facebook"></i></a></li>
 							<li><a href="#"><i class="icon-twitter"></i></a></li>

@@ -9,7 +9,16 @@
 		</ul> --}}
 			@auth
 			<ul id="top_menu">
-					<li class="hidden_tablet"><a href="admission.html" class="btn_1 rounded">Become a Teacher</a></li>
+					@if (Auth::user()->is_admin)
+					<li class="hidden_tablet"><a href="{{route('admin.users')}}" class="btn_1 rounded">Admin Dashboard</a></li>
+					@else
+						@if (Auth::user()->is_teacher)
+						<li class="hidden_tablet"><a href="{{route('teacher.courses')}}" class="btn_1 rounded">Teacher Dashboard</a></li>
+						@else
+							<li class="hidden_tablet"><a href="#" class="btn_1 rounded">Become a Teacher</a></li>
+						@endif
+					@endif
+					
 			</ul>
 			@endauth
 		<!-- /top_menu -->
