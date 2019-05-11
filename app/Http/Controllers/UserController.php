@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -43,8 +44,8 @@ class UserController extends Controller
     public function update_info(Request $request){
         $user = Auth::user();
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|min:3|max:255',
+            'last_name' => 'required|string|min:3|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id . '',
         ]);
 
@@ -80,7 +81,7 @@ class UserController extends Controller
 
         }
         else{
-            return 'error';
+            return Redirect::back()->withErrors(['The specified password does not match the actual password']);
         }
 
     }

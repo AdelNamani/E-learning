@@ -92,7 +92,7 @@
 
  @section('content')
      @include('partials.header')
- 
+
  <main>
      <section id="hero_in" class="general">
          <div class="wrapper">
@@ -121,7 +121,7 @@
                          <li>
                              <a href="{{route('profile.edit')}}" class="btn_1 rounded"> Edit </a>
                          </li>
- 
+
                      </ul>
                  </div>
              </aside>
@@ -135,18 +135,33 @@
                                     <h4><i class="icon-lock"></i>Change password</h4>
                                 </div>
                                 <form autocomplete="off" action="{{route('profile.update_password')}}" method="POST">
-                                    @csrf                            
+                                    @csrf
                                 <div class="form-group">
                                     <label>Old password</label>
                                     <input type="password" name="old_password" required class="form-control">
+                                    @if($errors->any())
+                                        <span class="text-danger small" role="alert">
+                                        <strong>{{ $errors->first() }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label>New password</label>
                                     <input class="form-control" type="password" name="password" required>
+                                    @error('password')
+                                    <span class="text-danger small" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Confirm new password</label>
                                     <input class="form-control" type="password" name="password_confirmation" required>
+                                    @error('password_confirmation')
+                                    <span class="text-danger small" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="btn_1 rounded full-width add_top_30"> Submit </button>
                                 </form>
@@ -159,18 +174,33 @@
                                 </div>
                                 <form autocomplete="off" action="{{route('profile.update_info')}}" method="POST">
                                     @csrf
-                            
+
                                 <div class="form-group">
                                     <label>First Name</label>
                                     <input class="form-control" type="text" name="first_name" value="{{$user->first_name}}" required >
+                                    @error('first_name')
+                                    <span class="text-danger small" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Last name</label>
                                     <input class="form-control"  type="text" name="last_name" value="{{$user->last_name}}" required>
+                                    @error('last_name')
+                                    <span class="text-danger small" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input class="form-control"  type="text" name="email" value="{{$user->email}}" required >
+                                    @error('email')
+                                    <span class="text-danger small" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="btn_1 rounded full-width add_top_30"> Submit </button>
                                 </form>

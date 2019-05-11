@@ -69,7 +69,7 @@
                                             <p>{{$course->description}}</p>
                                         </div>
                                         <ul>
-                                            <li><i class="icon-progress-2"></i> {{(int)($course->progress * 100)}}%</li>
+                                            <li>Progress : <i class="icon-progress-2"></i> {{(int)($course->progress * 100)}}%</li>
                                             <li><a href="{{route('course.show',['id'=>$course->id])}}">View course</a>
                                             </li>
                                         </ul>

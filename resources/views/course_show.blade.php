@@ -99,21 +99,25 @@
                                                         @if(count($chapter->questions)>0)
                                                             <li>
                                                                 <a @if ($chapter->users->contains(Auth::user()))
-                                                                     aria-disabled
-                                                                      @endif 
-                                                                      href="{{route('chapter.quiz' , ['id' => $chapter->id ]) }}">
+                                                                   aria-disabled
+                                                                   @endif
+                                                                   href="{{route('chapter.quiz' , ['id' => $chapter->id ]) }}">
                                                                     @if ($chapter->users->contains(Auth::user()))
-                                                                    @php
-                                                                        $user = $chapter->users->find(Auth::user()->id) ;
-                                                                        $score = $user->pivot->score ;
-                                                                    @endphp 
-                                                                   
-                                                                    <i @if ($score >= 0.5) class="icon-ok" style="color : green !important ;" @else class="icon-cancel" style="color : red !important ;" @endif></i> Note : 
-                                                                      {{$score }}
-                                                                    </a></li>
-                                                                    @else 
-                                                                    <i class="icon-help"></i>Quiz </a></li>
-                                                                    @endif
+                                                                        @php
+                                                                            $user = $chapter->users->find(Auth::user()->id) ;
+                                                                            $score = $user->pivot->score ;
+                                                                        @endphp
+
+                                                                        <i @if ($score >= 0.5) class="icon-ok"
+                                                                           style="color : green !important ;"
+                                                                           @else class="icon-cancel"
+                                                                           style="color : red !important ;" @endif></i>
+                                                                        Your note in that quiz :
+                                                                        {{$score * 10 }}/10
+                                                                </a></li>
+                                                        @else
+                                                            <i class="icon-help"></i>Quiz </a></li>
+                                                        @endif
                                                         @else
                                                             <li>This chapter doesn't have a quiz !</li>
                                                         @endif
