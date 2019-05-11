@@ -75,7 +75,7 @@
                     quizHtml += '<p class="question">' + question.q + '</p>';
                     quizHtml += '<ul class="answers">';
                     $.each(question.options, function(index, answer) {
-                        quizHtml += '<li><a href="#" data-index="' + index + '">' + answer + '</a></li>';
+                        quizHtml += '<li><a href="#" data-index="' + index + '" data-question="' + i + '">' + answer + '</a></li>';
                     });
                     quizHtml += '</ul>';
                     quizHtml += '</div>';
@@ -132,14 +132,15 @@
                     response = '',
                     selected = $answerEl.data('index'),
                     currentQuestionIndex = currentQuestion - 1,
-                    correct = questions[currentQuestionIndex].correctIndex;
-
+                    correct = questions[currentQuestionIndex].correctIndex;                    
                 if (selected === correct) {
                     $answerEl.addClass('correct');
                     response = questions[currentQuestionIndex].correctResponse;
                     score++;
                 } else {
+                    var correctElement = $("[data-index=" + correct + "][data-question=" + currentQuestionIndex + "]");
                     $answerEl.addClass('incorrect');
+                    correctElement.addClass('correct');
                     response = questions[currentQuestionIndex].incorrectResponse;
                     if (!base.options.allowIncorrect) {
                         base.methods.gameOver(response);

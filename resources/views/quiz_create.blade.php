@@ -36,7 +36,7 @@
                         <div :id="question.id" class="collapse show" role="tabpanel" data-parent="#payment">
                             <div class="card-body">
                                     <div class="row"  v-for="(proposition,indexP) in question.propositions">
-                                        <div class="col-lg-11">
+                                        <div class="col-lg-11" v-bind:class= "{ green : proposition.is_correct , red : !proposition.is_correct} ">
                                                 @{{proposition.statement}}
                                         </div>
                                         <div class="col-lg-1">
@@ -91,7 +91,7 @@
                             {
                                 id : {{$proposition->id}},
                                 statement: '{{$proposition->statement}}',
-                                is_correct: {{$proposition->is_correct}}
+                                is_correct: '{{$proposition->is_correct}}'
                             },
                             @endforeach
                         ],
@@ -105,6 +105,7 @@
             methods: {
                 add_proposition: function (question_index) {
                     app.questions[question_index].proposition_error = '';
+                    $(document.body).css({'cursor': 'wait'});
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "POST",
@@ -115,9 +116,11 @@
                             is_correct: this.questions[question_index].new_proposition_correct ? 1 : 0
                         },
                     }).done(function(data){
+                        $(document.body).css({'cursor': 'default'});
                         app.push_proposition(question_index,data);
                         app.questions[question_index].new_proposition = '';
                     }).fail(function (data) {
+                        $(document.body).css({'cursor': 'default'});
                         app.questions[question_index].proposition_error = data.responseJSON.errors.statement[0];
                     });
                 },
@@ -133,6 +136,7 @@
                 add_question: function () {
                     var id = null;
                     this.question_error = '';
+                    $(document.body).css({'cursor': 'wait'});
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "POST",
@@ -142,9 +146,11 @@
                             statement: this.new_question,
                         },
                     }).done(function (data) {
+                        $(document.body).css({'cursor': 'default'});
                         app.push_question(data);
                         app.new_question = '';
                     }).fail(function (data) {
+                        $(document.body).css({'cursor': 'default'});
                         app.question_error = data.responseJSON.errors.statement[0];
                     });
 
@@ -162,11 +168,13 @@
 
                 delete_proposition : function (question_index,proposition_index) {
                     let id  = this.questions[question_index].propositions[proposition_index].id;
+                    $(document.body).css({'cursor': 'wait'});
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "DELETE",
                         url: '/proposition/'+id,
                     }).done(function (data) {
+                        $(document.body).css({'cursor': 'default'});
                         app.questions[question_index].propositions.splice(proposition_index,1);
                     });
                 },
@@ -174,11 +182,13 @@
                 delete_question : function (question_index) {
                     let con = true;
                     let id  = this.questions[question_index].id;
+                    $(document.body).css({'cursor': 'wait'});
                     $.ajax({
                         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
                         type: "DELETE",
                         url: '/question/'+id,
                     }).done(function (data) {
+                        $(document.body).css({'cursor': 'default'});
                         app.questions.splice(question_index,1);
                     });
                 }
