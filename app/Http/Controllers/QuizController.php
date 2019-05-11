@@ -7,6 +7,7 @@ use App\Proposition;
 use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class QuizController extends Controller
 {
@@ -46,6 +47,17 @@ class QuizController extends Controller
             'is_correct' => 'required|boolean'
         ]);
 
+        if ($request['is_correct']==1){
+            $question = Question::findOrFail($request['question_id']);
+            foreach($question->propositions as $proposition){
+                if ($proposition->is_correct){
+                    return response(json_encode('A question must have only one correct proposition'),403);
+                }
+
+            }
+        }
+
+
         $proposition = new Proposition();
         $proposition->statement = $request['statement'];
         $proposition->question_id = $request['question_id'];
@@ -54,10 +66,10 @@ class QuizController extends Controller
 
         $id = $proposition->id;
         if ($id != null) {
-            return response(json_encode($id));
+            return response(json_encode($id),200);
         }
         else{
-            return response(403);
+            return response(json_encode(['error'=>'Something went wrong refresh and try again']),403);
         }
     }
 

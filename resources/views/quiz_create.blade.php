@@ -119,9 +119,14 @@
                         $(document.body).css({'cursor': 'default'});
                         app.push_proposition(question_index,data);
                         app.questions[question_index].new_proposition = '';
+                        app.questions[question_index].new_proposition_correct = 0;
                     }).fail(function (data) {
                         $(document.body).css({'cursor': 'default'});
-                        app.questions[question_index].proposition_error = data.responseJSON.errors.statement[0];
+                        console.log(data);
+                        if( typeof data.responseJSON == 'undefined')
+                            app.questions[question_index].proposition_error = data.responseText;
+                        else
+                            app.questions[question_index].proposition_error = data.responseJSON.errors.statement[0];
                     });
                 },
 
@@ -129,7 +134,7 @@
                     this.questions[question_index].propositions.push({
                         id : id,
                         statement: this.questions[question_index].new_proposition,
-                        is_correct: false
+                        is_correct: this.questions[question_index].new_proposition_correct ? 1 : 0
                     });
                 },
 
