@@ -92,14 +92,28 @@
                                                                    data-var2="{{$lesson->users->contains(Auth::user())}}"
                                                                    class="video video-click"> {{$lesson->name}} </a>
                                                             </li>
-                                                            {{-- <a href="https://www.youtube.com/watch?v=eEKfWVvADiQ" class="video"> {{$lesson->name}} </a></li> --}}
+                                                            {{-- <a href="https://www.youtube   .com/watch?v=eEKfWVvADiQ" class="video"> {{$lesson->name}} </a></li> --}}
                                                         @endforeach
                                                         <li><a href="{{asset("storage/".$chapter->support)}}"
                                                                class="txt_doc">Chapter support</a></li>
                                                         @if(count($chapter->questions)>0)
                                                             <li>
-                                                                <a href="{{route('chapter.quiz' , ['id' => $chapter->id ]) }}">
-                                                                    <i class="icon-help"></i> Quiz </a></li>
+                                                                <a @if ($chapter->users->contains(Auth::user()))
+                                                                     aria-disabled
+                                                                      @endif 
+                                                                      href="{{route('chapter.quiz' , ['id' => $chapter->id ]) }}">
+                                                                    @if ($chapter->users->contains(Auth::user()))
+                                                                    @php
+                                                                        $user = $chapter->users->find(Auth::user()->id) ;
+                                                                        $score = $user->pivot->score ;
+                                                                    @endphp 
+                                                                   
+                                                                    <i @if ($score >= 0.5) class="icon-ok" style="color : green !important ;" @else class="icon-cancel" style="color : red !important ;" @endif></i> Note : 
+                                                                      {{$score }}
+                                                                    </a></li>
+                                                                    @else 
+                                                                    <i class="icon-help"></i>Quiz </a></li>
+                                                                    @endif
                                                         @else
                                                             <li>This chapter doesn't have a quiz !</li>
                                                         @endif

@@ -18,7 +18,7 @@ class Chapter extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class)->withTimestamps();;
+        return $this->belongsToMany(User::class)->withTimestamps()->withPivot('score');
     }
 
     public function questions(){

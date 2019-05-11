@@ -13,13 +13,16 @@
 		<section id="hero_in" class="general"  style="background : url({{asset("storage/".$chapter->course->photo)}}) center center no-repeat;">
 			<div class="wrapper" style="background-color:rgba(0, 0, 0, 0.7);">
 				<div class="container">
+                    @if($completed)
                     <h1 class="fadeInUp"><span></span>Quiz - {{$chapter->name}}</h1>
                     <a href="#" id="quiz-start-btn" class="btn_1 rounded">Start Quiz</a>
+                    @else
+                    <h1 class="fadeInUp"><span></span> Complete all chapter lessons first ! </h1>
+                    @endif
 				</div>
 			</div>
 		</section>
 		<!--/hero_in-->
-
 		<div class="container margin_60_35">
 			<div class="row">
 				<div class="col-lg-10" id="faq">
@@ -33,14 +36,12 @@
             
                         </div>
                     </div>
-                    @else
-                        <h2>Complete all chapter lessons first !</h2>
                     @endif
 				</div>
 				<!-- /col -->
 			</div>
 			<!-- /row -->
-		</div>
+        </div>
 		<!--/container-->
 	</main>
 

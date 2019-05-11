@@ -4797,8 +4797,8 @@ ul.bullets li:before {
 }
 
 .margin_120_95 {
-  padding-top: 120px;
-  padding-bottom: 95px;
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 @media (max-width: 991px) {
   .margin_120_95 {
