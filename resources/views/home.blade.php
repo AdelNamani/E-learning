@@ -11,16 +11,18 @@
                 <div class="container">
                     <h3>What would you learn?</h3>
                     <p>Increase your expertise in business, technology and personal development</p>
-                    <form method="post" action="{{route('course.search')}}">
+                    {{-- <form method="post" action="{{route('course.search')}}"> --}}
                         <div id="custom-search-input">
                             <div class="input-group">
-                                <input type="text" class="dropdown-toggle search-query" id="search"
-                                       data-toggle="dropdown"
+                                <input type="text" class=" search-query" id="search"
                                        placeholder="Ex. Architecture, Specialization...">
-                                <input type="submit" class="btn_search" value="Search">
+                                <input  type="submit" class="btn_search" id="btn_search" value="Search">
                             </div>
+                            <div class="results" id="search-results">
+                                    {{-- <div class="result-element"> <a>Lorem epsum </a></div>  --}}
+                                </div>
                         </div>
-                    </form>
+                    {{-- </form> --}}
                 </div>
             </div>
         </section>
@@ -137,8 +139,15 @@
 
 @section('js')
     <script>
-        $('#search').on('input', function () {
+        if ($('#search').val() == '') {
+            $('#search-results').css('display' , 'none');
+            $('#search-results').html('');
+        }
+
+        function searchFun() {
             if ($('#search').val() != '') {
+                $('#search-results').css('display' , 'none');
+                $('#search-results').html('');
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': '{{csrf_token()}}'},
                     type: 'POST',
@@ -146,12 +155,33 @@
                     data: {
                         q: $('#search').val()
                     }
-                }).done(function (data) {
-                    console.log(data);
-                    $('#search-dropdown').dropdown();
                 })
+                .done(function (data) {
+                    $('#search-results').css('display' , 'none');
+                    $('#search-results').html('');
+                    data = JSON.parse(data) ;                    
+                    data.forEach(function(course) {                        
+                        var route = "/course/" + course.id ;
+                        $('#search-results').append(
+                        '<div class="result-element">' + 
+                        '<a href=' + route +'>'+
+                        course.name +'</a></div>')
+                        });
+
+                    $('#search-results').css('display' , 'block');
+                })
+                .fail(function() {
+                    $('#search-results').css('display' , 'none');
+                    $('#search-results').html('');
+                })
+            } else {
+                $('#search-results').css('display' , 'none');
+                $('#search-results').html('');
             }
-        });
+        }
+
+        $('#search').on('input', searchFun) ;
+        $('#btn_search').on('click', searchFun) ;
     </script>
 
 @endsection

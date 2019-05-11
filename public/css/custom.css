@@ -136,3 +136,21 @@
     font-size: inherit;
     color: #ddd;
 }
+
+
+
+.results {
+  position: absolute ;
+  display: none ;
+  background: white ;
+  height : auto ;
+  width: 100% ;
+  text-align: left ;
+  padding : 20px ;
+  font-size: 1rem;
+  color: #333;
+}
+
+.result-element {
+  padding : 5px 0 ;
+}
