@@ -8,13 +8,19 @@
 			<li><a href="#0" class="search-overlay-menu-btn">Search</a></li>
 		</ul> --}}
 			@auth
-				 @if(!(auth()->user()->is_teacher || auth()->user()->is_admin))
-					<ul id="top_menu">
-						<li class="hidden_tablet">
-							<a href="#" class="btn_1 rounded">Become a Teacher</a>
-						</li>
-					</ul>
-				@endif
+
+			<ul id="top_menu">
+					@if (Auth::user()->is_admin)
+					<li class="hidden_tablet"><a href="{{route('admin.users')}}" class="btn_1 rounded">Admin Dashboard</a></li>
+					@else
+						@if (Auth::user()->is_teacher)
+						<li class="hidden_tablet"><a href="{{route('teacher.courses')}}" class="btn_1 rounded">Teacher Dashboard</a></li>
+						@else
+							<li class="hidden_tablet"><a href="#" class="btn_1 rounded">Become a Teacher</a></li>
+						@endif
+					@endif
+					
+			</ul>
 			@endauth
 		<!-- /top_menu -->
 		<a href="#menu" class="btn_mobile">
