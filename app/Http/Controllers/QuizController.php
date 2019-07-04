@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Chapter;
+use App\Course;
 use App\Proposition;
 use App\Question;
 use Illuminate\Http\Request;
@@ -31,6 +32,24 @@ class QuizController extends Controller
         $chapter = Chapter::findOrFail($request['id']);
         $chapter->users()->detach($user->id);
         $chapter->users()->attach($user->id , ['score' => $request['score']]);
+
+//        $score = 0;
+//        $chapters_with_quiz=0;
+//        $course = Course::findOrFail($chapter->course->id);
+//        foreach ($course->chapters as $chapter){
+//            if(count($chapter->questions)>0){
+//                $chapters_with_quiz++;
+//                if($chapter->users->contains(Auth::user())){
+//                    $user = $chapter->users->find(Auth::user()->id) ;
+//                    $score += $user->pivot->score ;
+//                }
+//            }
+//        }
+//
+//        if ($chapters_with_quiz==0 || ($score / $chapters_with_quiz >= 0.5)){
+//            return redirect(route('course.certificate',['id'=>$chapter->course->id]));
+//        }
+
         return response(200);
     }
 
