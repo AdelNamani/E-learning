@@ -25,7 +25,7 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required|max:50|min:10",
+            "name"=>"required|max:50|min:5",
             "description"=>"required|max:300|min:20",
             'photo' => 'image|mimes:jpeg,png,jpg',
             /**TODO : Validate image dimensions

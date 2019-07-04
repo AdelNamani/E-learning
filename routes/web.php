@@ -94,3 +94,6 @@ Route::post('/admin/check', 'AdminController@check')->name('admin.check')->middl
 
 Route::post('/admin/updateState','AdminController@updateState')->name('admin.updateState')->middleware(['auth','verified','admin']);
 
+/**----------------------------------------------------------------------------------------------------------------**/
+
+Route::get('/course/{id}/certificate','CourseController@certificate')->name('course.certificate')->middleware(['auth','verified']);

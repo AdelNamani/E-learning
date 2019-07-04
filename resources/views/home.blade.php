@@ -62,6 +62,11 @@
         <!-- /filters -->
 
         <div class="container margin_60_35">
+            @if($courses->count() == 0)
+                <div class="row justify-content-center m-5">
+                    <h2>No courses yet ! Come back later.</h2>
+                </div>
+            @endif
             @foreach($courses as $course )
                 <div class="box_list wow">
                     <div class="row no-gutters">

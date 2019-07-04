@@ -65,13 +65,22 @@
                                 <div class="col-md-6">
                                     <div class="box_grid wow">
                                         <div class="wrapper">
-                                            <h3>{{$course->name}}</h3>
+                                            <h3> <a href="{{route('course.show',['id'=>$course->id])}}" >{{$course->name}}</a> </h3>
                                             <p>{{$course->description}}</p>
                                         </div>
                                         <ul>
                                             <li>Progress : <i class="icon-progress-2"></i> {{(int)($course->progress * 100)}}%</li>
-                                            <li><a href="{{route('course.show',['id'=>$course->id])}}">View course</a>
+                                            @if($course->get_certificate)
+                                            <li>
+                                                <a href="{{route('course.certificate',['id'=>$course->id])}}" >
+                                                    Get Certificate
+                                                </a>
                                             </li>
+                                                @else
+                                                <li>
+
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>

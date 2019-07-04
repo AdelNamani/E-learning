@@ -25,6 +25,18 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert(
+            array(
+                'first_name'=>'Admin',
+                'last_name'=>'Admin',
+                'email' => 'admin@cufa.dz',
+                'is_teacher' => true,
+                'is_admin'=>true,
+                'email_verified_at' => '2019-06-26 00:14:00',
+                'password' => bcrypt('cufa')
+            )
+        );
     }
 
     /**

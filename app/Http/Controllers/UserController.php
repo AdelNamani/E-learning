@@ -27,6 +27,23 @@ class UserController extends Controller
         foreach($courses as $course){
             $count = 0;
 
+            $score = 0;
+            $chapters_with_quiz=0;
+            foreach ($course->chapters as $chapter){
+                if(count($chapter->questions)>0){
+                    $chapters_with_quiz++;
+                    if($chapter->users->contains(Auth::user())){
+                        $user = $chapter->users->find(Auth::user()->id) ;
+                        $score += $user->pivot->score ;
+                    }
+                }
+            }
+            if ($chapters_with_quiz==0 || ($score / $chapters_with_quiz >= 0.5)){
+                $course->get_certificate = true;
+            }else{
+                $course->get_certificate = false;
+            }
+
             foreach ($course->get_lessons() as $lesson){
                 if ($lessons->contains($lesson)) $count ++;
             }

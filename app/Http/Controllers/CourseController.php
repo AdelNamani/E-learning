@@ -144,4 +144,30 @@ class CourseController extends Controller
         $courses=Course::where('name','like',"%{$request->input('q')}%")->select('name','id')->get()->take('5');
         return json_encode($courses);
     }
+
+    public function certificate(Request $request){
+        $score = 0;
+        $chapters_with_quiz=0;
+        $course = Course::findOrFail($request['id']);
+        foreach ($course->chapters as $chapter){
+            if(count($chapter->questions)>0){
+                $chapters_with_quiz++;
+                if($chapter->users->contains(Auth::user())){
+                    $user = $chapter->users->find(Auth::user()->id) ;
+                    $score += $user->pivot->score ;
+                }
+            }
+        }
+
+        if ($chapters_with_quiz==0 || ($score / $chapters_with_quiz >= 0.5)){
+            return [
+                'user' => Auth::user()->first_name . ' ' . Auth::user()->last_name,
+                'course' => $course->name,
+                'teacher' => $course->user->first_name . ' ' . $course->user->last_name
+            ] ;
+        }
+        else{
+            abort(403);
+        }
+    }
 }
