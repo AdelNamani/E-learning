@@ -73,7 +73,7 @@
                                             <li>Progress : <i class="icon-progress-2"></i> {{(int)($course->progress * 100)}}%</li>
                                             @if($course->get_certificate)
                                             <li>
-                                                <a href="{{route('course.certificate',['id'=>$course->id])}}" >
+                                                <a target="_blank" href="{{route('course.certificate',['id'=>$course->id])}}" >
                                                     Get Certificate
                                                 </a>
                                             </li>

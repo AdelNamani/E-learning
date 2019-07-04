@@ -19,7 +19,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::take(5)->get();
+        $courses = Course::where('state','=','approved')->get()->take('5');
         foreach ($courses as $course) {
             $course->teacher = $course->user->first_name . ' ' . $course->user->last_name;
         }
@@ -59,7 +59,7 @@ class CourseController extends Controller
             $course->photo = $correct_path;
         }
         $course->save();
-        return redirect(route('course.show', ['id' => $course->id]));
+        return redirect(route('course.chapters', ['id' => $course->id]));
     }
 
     /**
@@ -72,7 +72,26 @@ class CourseController extends Controller
     {
         $course = Course::findOrFail($request['id']);
         $course->teacher = $course->user->first_name . ' ' . $course->user->last_name;
-        return view('course_show', ['course' => $course]);
+        if($course->state=='approved'){
+            $score = 0;
+            $chapters_with_quiz=0;
+            foreach ($course->chapters as $chapter){
+                if(count($chapter->questions)>0){
+                    $chapters_with_quiz++;
+                    if($chapter->users->contains(Auth::user())){
+                        $user = $chapter->users->find(Auth::user()->id) ;
+                        $score += $user->pivot->score ;
+                    }
+                }
+            }
+
+            $completed=  ($chapters_with_quiz==0 || ($score / $chapters_with_quiz >= 0.5)) ? true : false;
+
+            return view('course_show', ['course' => $course,'completed'=>$completed]);
+        }
+        else {
+            return view('course_show', ['course' => $course]);
+        }
     }
 
     /**
@@ -166,8 +185,13 @@ class CourseController extends Controller
 //                'course' => $course->name,
 //                'teacher' => $course->user->first_name . ' ' . $course->user->last_name
 //            ] ;
+            $certif= "<h1>Certificate</h1>
+                <h2>For : ". Auth::user()->first_name . " " . Auth::user()->last_name . "  </h2>
+                <h2>For completing ". $course->name ." course</h2>
+                <br>
+                <h3>Teacher : " .$course->user->first_name ." " .$course->user->last_name ."</h3>";
             $pdf = App::make('dompdf.wrapper');
-            $pdf->loadHTML('<h1>Test</h1>');
+            $pdf->loadHTML($certif)->setPaper('a4', 'landscape');
             return $pdf->stream();
         }
         else{

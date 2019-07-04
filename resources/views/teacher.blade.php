@@ -18,9 +18,7 @@
                 @foreach ($courses as $course)
                     <li>
                         <figure><img src="{{asset("storage/".$course->photo)}}" alt=""></figure>
-                        <h4> {{$course->name }}
-                            {{-- <i class="pending">Pending</i> --}}
-                        </h4>
+                        <h4> <a href="{{route('course.show',['id'=>$course->id])}}" >{{$course->name}}</a> </h4>
                         {{-- <ul class="course_list">
                             <li><strong>Start date</strong> 11 November 2017</li>
                             <li><strong>Expire date</strong> 11 April 2018</li>

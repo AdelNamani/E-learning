@@ -3,7 +3,7 @@
 @section('content')
     <div class="box_general">
         <div class="header_box">
-            <h2 class="d-inline-block">Course chapters </h2>
+            <h2 class="d-inline-block">{{$course->name}} chapters </h2>
         </div>
         <div class="list_general">
             <ul>

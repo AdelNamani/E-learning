@@ -26,7 +26,7 @@ class CourseRequest extends FormRequest
     {
         return [
             "name"=>"required|max:50|min:5",
-            "description"=>"required|max:300|min:20",
+            "description"=>"required|max:30000|min:20",
             'photo' => 'image|mimes:jpeg,png,jpg',
             /**TODO : Validate image dimensions
              * check that :

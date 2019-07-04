@@ -53,7 +53,16 @@
                             <!-- /row -->
                         </section>
                         <!-- /section -->
-
+                        @if($completed)
+                            <div class="row my-5">
+                                <h4>You have completed that course, <a href="{{route('course.certificate',['id'=>$course->id])}}" >Get you certificate !</a> </h4>
+                            </div>
+                        @endif
+                        @if ($course->state != 'approved')
+                            <div class="row justify-content-center">
+                                <h2> This course isn't available now ! Please come back later</h2>
+                            </div>
+                        @else
                         <section id="lessons">
                             <div class="intro_title">
                                 <h2>Lessons</h2>
@@ -131,7 +140,7 @@
                             </div>
                             <!-- /accordion -->
                         </section>
-
+                        @endif
                     </div>
                     <!-- /col -->
                 </div>

@@ -17,7 +17,8 @@
                     <th scope="col">Course Name</th>
                     <th scope="col">Description</th>
                     <th scope="col"> Author </th>
-                    <th scope="col">  State </th>
+                    <th scope="col"> State </th>
+                    <th scope="col"> Change state </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,7 @@
                         <td>{{$course->name }}</td>
                         <td>{{$course->description }}</td>
                         <td>{{$course->user->first_name . ' ' . $course->user->last_name }}</td>
+                        <td>{{$course->state }}</td>
                         {{-- <td>{{$course->state }}</td> --}}
                         <td class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
