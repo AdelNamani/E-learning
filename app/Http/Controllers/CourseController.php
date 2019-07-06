@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use PDF ;
 use App\Http\Requests\CourseRequest;
 use Storage;
 
@@ -180,18 +181,13 @@ class CourseController extends Controller
         }
 
         if ($chapters_with_quiz==0 || ($score / $chapters_with_quiz >= 0.5)){
-//            return [
-//                'user' => Auth::user()->first_name . ' ' . Auth::user()->last_name,
-//                'course' => $course->name,
-//                'teacher' => $course->user->first_name . ' ' . $course->user->last_name
-//            ] ;
-            $certif= "<h1>Certificate</h1>
-                <h2>For : ". Auth::user()->first_name . " " . Auth::user()->last_name . "  </h2>
-                <h2>For completing ". $course->name ." course</h2>
-                <br>
-                <h3>Teacher : " .$course->user->first_name ." " .$course->user->last_name ."</h3>";
+            $data = [
+                               'user' => Auth::user()->first_name . ' ' . Auth::user()->last_name,
+                               'course' => $course->name,
+                               'teacher' => $course->user->first_name . ' ' . $course->user->last_name
+                           ];
             $pdf = App::make('dompdf.wrapper');
-            $pdf->loadHTML($certif)->setPaper('a4', 'landscape');
+            $pdf = PDF::loadView('Certificate' , $data)->setPaper('a4', 'landscape'); 
             return $pdf->stream();
         }
         else{
