@@ -187,7 +187,7 @@ class CourseController extends Controller
                                'teacher' => $course->user->first_name . ' ' . $course->user->last_name
                            ];
             $pdf = App::make('dompdf.wrapper');
-            $pdf = PDF::loadView('Certificate' , $data)->setPaper('a4', 'landscape'); 
+            $pdf = PDF::loadView('certificate' , $data)->setPaper('a4', 'landscape'); 
             return $pdf->stream();
         }
         else{
